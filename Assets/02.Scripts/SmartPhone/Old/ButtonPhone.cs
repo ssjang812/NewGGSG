@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class ButtonPhone : MonoBehaviour
 {
     private PhotonView PV;
-    private ExperimentManager experimentManager;
+    private ExperimentManager_Old experimentManager;
     private Button button;
     private EventTrigger eventTrigger;
     private bool t4TargetFlag;
@@ -18,7 +18,7 @@ public class ButtonPhone : MonoBehaviour
     void Start()
     {
         PV = GameObject.FindGameObjectWithTag("WorldEvent").GetComponent<PhotonView>();
-        experimentManager = GameObject.FindGameObjectWithTag("ExperimentManager").GetComponent<ExperimentManager>();
+        experimentManager = GameObject.FindGameObjectWithTag("ExperimentManager").GetComponent<ExperimentManager_Old>();
         button = gameObject.GetComponent<Button>();
         eventTrigger = gameObject.GetComponent<EventTrigger>();
         t4TargetFlag = false;

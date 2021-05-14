@@ -8,7 +8,7 @@ using UnityEngine;
 public class GestureGlasses : MonoBehaviour
 {
     private PhotonView PV;
-    private ExperimentManager experimentManager;
+    private ExperimentManager_Old experimentManager;
     private ObjectManipulator objectManipulator;
 
     private EyeTrackingTarget eyeTrackingTarget;
@@ -16,7 +16,7 @@ public class GestureGlasses : MonoBehaviour
     void Start()
     {
         PV = GameObject.FindGameObjectWithTag("WorldEvent").GetComponent<PhotonView>();
-        experimentManager = GameObject.FindGameObjectWithTag("ExperimentManager").GetComponent<ExperimentManager>();
+        experimentManager = GameObject.FindGameObjectWithTag("ExperimentManager").GetComponent<ExperimentManager_Old>();
         objectManipulator = gameObject.GetComponent<ObjectManipulator>();
         objectManipulator.OnManipulationStarted.AddListener(OnGesture);
     }

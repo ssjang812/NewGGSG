@@ -12,7 +12,7 @@ public class GesturePhone : MonoBehaviour
 
     private GameObject WorldEvent;
     private PhotonView PV;
-    private ExperimentManager experimentManager;
+    private ExperimentManager_Old experimentManager;
 
 
 #if UNITY_EDITOR
@@ -30,7 +30,7 @@ public class GesturePhone : MonoBehaviour
     {
         WorldEvent = GameObject.FindGameObjectWithTag("WorldEvent");
         PV = WorldEvent.GetComponent<PhotonView>();
-        experimentManager = GameObject.FindGameObjectWithTag("ExperimentManager").GetComponent<ExperimentManager>();
+        experimentManager = GameObject.FindGameObjectWithTag("ExperimentManager").GetComponent<ExperimentManager_Old>();
     }
 
 

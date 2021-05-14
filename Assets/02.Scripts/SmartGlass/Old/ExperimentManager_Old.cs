@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using static RPC_ExperimentState;
 
-public class ExperimentManager : MonoBehaviour //메인함수와 같은역할을하니 실행순서를 맨 마지막으로 설정해야 문제가없다. (다른 스크립트들의 설정값이 다셋팅된후 구동시작)
+public class ExperimentManager_Old : MonoBehaviour //메인함수와 같은역할을하니 실행순서를 맨 마지막으로 설정해야 문제가없다. (다른 스크립트들의 설정값이 다셋팅된후 구동시작)
 {
     private GameObject WorldEvent;
     private PhotonView PV;

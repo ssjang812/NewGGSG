@@ -30,9 +30,4 @@ public class PhoneSwipeSender : MonoBehaviour
         Tuple<float, float> screenDeltaXY = ParseScreenDelta();
         return new Vector3(screenDeltaXY.Item1, 0, screenDeltaXY.Item2) * Time.deltaTime * gain;
     }
-
-    public void OnClickDebug()
-    {
-        PV.RPC("RPC_OnClickDebug", RpcTarget.All);
-    }
 }

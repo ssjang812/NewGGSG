@@ -38,7 +38,19 @@ public class RPC_PhonetoGlasses : MonoBehaviour
         //Debug.Log("RPC_SyncGyroDelta :" + gyroDelta);
         debugCube2.transform.Translate(gyroDelta);
     }
-    
+
+    [PunRPC]
+    void RPC_OnPointerDown()
+    {
+        Debug.Log("OnPointerDown!");
+    }
+
+    [PunRPC]
+    void RPC_OnPointerUp()
+    {
+        Debug.Log("OnPointerUp!");
+    }
+
     [PunRPC]
     void RPC_OnClickDebug()
     {
