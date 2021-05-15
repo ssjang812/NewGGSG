@@ -15,32 +15,25 @@ enum Technique
     GlassesHand
 }
 
-struct Block
+struct ExperimentCase
 {
-    int number;
-    Distance distance;
-    Technique technique;
+    public Distance distance;
+    public Technique technique;
 }
 
 struct ExperimentState
 {
-    int participantNum;
-    int curBlockNum;
-    Distance curBlockDistance;
-    Technique curBlockTechnique;
-    float curPositionOffset;
-    float curRotationOffset;
-}
-
-struct ExperimentFlow
-{
-    int flowNum;
-    List<Block> blockOrder;
+    public int participantNum;
+    public int curBlockNum;
+    public Distance curBlockDistance;
+    public Technique curBlockTechnique;
+    public float curPositionOffset;
+    public float curRotationOffset;
 }
 
 struct ExperimentRandomValue
 {
-    List<float> NearPositionOffsetValues;
-    List<float> FarPositionOffsetValues;
-    List<float> RotationOffsetValues;
+    public List<float> NearPositionOffsetValues;
+    public List<float> FarPositionOffsetValues;
+    public List<float> RotationOffsetValues;
 }
