@@ -9,14 +9,15 @@ public class CSVManager : MonoBehaviour
     private static string reportDirectoryName = "Report";
     private static string reportFileName = "Report.csv";
     private static string reportSeparator = ",";
-    private static string[] reportHeaders = new string[4]
+    private static string[] reportHeaders = new string[5]
     {
-        "trial",
-        "event",
-        "target",
-        "target point"
+        "Participant",
+        "Block",
+        "Set",
+        "Trial",
+        "Event"
     };
-    private static string timeStampHeader = "time stamp";
+    private static string timeStampHeader = "Time Stamp";
 
     #region Interactions
 

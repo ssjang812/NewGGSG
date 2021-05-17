@@ -14,6 +14,7 @@ public class RPC_PhonetoGlasses : MonoBehaviour
 
     public static UnityEvent event_SyncSwipeDelta;
     public static UnityEvent event_SyncGyroDelta;
+    public static UnityEvent event_OnPointerDown;
     public static UnityEvent event_OnPointerUp;
 
     void Start()
@@ -22,6 +23,8 @@ public class RPC_PhonetoGlasses : MonoBehaviour
             event_SyncSwipeDelta = new UnityEvent();
         if (event_SyncGyroDelta == null)
             event_SyncGyroDelta = new UnityEvent();
+        if (event_OnPointerDown == null)
+            event_OnPointerDown = new UnityEvent();
         if (event_OnPointerUp == null)
             event_OnPointerUp = new UnityEvent();
     }
@@ -45,6 +48,8 @@ public class RPC_PhonetoGlasses : MonoBehaviour
     [PunRPC]
     void RPC_OnPointerDown()
     {
+        event_OnPointerDown.Invoke();
+        Debug.Log("OnPointerDown!");
     }
 
     [PunRPC]

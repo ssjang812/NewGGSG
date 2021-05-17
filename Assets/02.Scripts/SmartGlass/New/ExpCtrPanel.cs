@@ -26,9 +26,4 @@ public class ExpCtrPanel : MonoBehaviour
             ExpNumText.text = expNumber.ToString();
         }
     }
-
-    public void StartExperiment()
-    {
-
-    }
 }
