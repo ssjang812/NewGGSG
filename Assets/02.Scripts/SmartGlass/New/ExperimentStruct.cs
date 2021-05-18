@@ -12,7 +12,14 @@ enum Technique
 {
     PhoneSwipe,
     PhoneGyro,
-    GlassesHand
+    GlassesHead
+}
+
+enum TrialPhase
+{
+    RoughPlacement,
+    FinePlacement,
+    Rotation
 }
 
 struct ExperimentCase
@@ -23,12 +30,13 @@ struct ExperimentCase
 
 struct ExperimentState
 {
-    public int participantNum;
-    public int curBlockNum;
-    public Distance curBlockDistance;
-    public Technique curBlockTechnique;
-    public float curPositionOffset;
-    public float curRotationOffset;
+    public static int participantNum;
+    public static int curBlockNum;
+    public static Distance curBlockDistance;
+    public static Technique curBlockTechnique;
+    public static TrialPhase trialPhase;
+    public static float curPositionOffset;
+    public static float curRotationOffset;
 }
 
 struct ExperimentRandomValue

@@ -6,7 +6,6 @@ using UnityEngine;
 public class PhoneGyroSender : MonoBehaviour
 {
     public PhotonView PV;
-    public float gain;
 
     void Start()
     {
@@ -22,6 +21,6 @@ public class PhoneGyroSender : MonoBehaviour
     // RPC를 통해 보내줄 부분
     public Vector3 RotDelYXtoScrDelXZ()
     {
-        return new Vector3(Input.gyro.rotationRateUnbiased.y * Time.deltaTime * gain, 0, -Input.gyro.rotationRateUnbiased.x * Time.deltaTime * gain);
+        return new Vector3(Input.gyro.rotationRateUnbiased.y * Time.deltaTime, 0, -Input.gyro.rotationRateUnbiased.x * Time.deltaTime);
     }
 }

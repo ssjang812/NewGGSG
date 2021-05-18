@@ -11,7 +11,8 @@ public class MoveObjWithHead : MonoBehaviour
     float prerotX;
     float delRotY;
     float delRotX;
-    public float gain;
+    public float positionGain;
+    public float rotationGain;
 
     void Start()
     {
@@ -25,8 +26,8 @@ public class MoveObjWithHead : MonoBehaviour
     void Update()
     {
         HeadRotDelYXUpdate();
-        transform.Translate(RotDelYXtoScrDelXZ());
-        //Debug.Log(CameraCache.Main.transform.forward.x + " " + CameraCache.Main.transform.forward.y + " " + CameraCache.Main.transform.forward.z);
+        MoveWithHead();
+        RotateWithHead();
     }
 
     private void HeadRotDelYXUpdate()
@@ -41,6 +42,23 @@ public class MoveObjWithHead : MonoBehaviour
 
     public Vector3 RotDelYXtoScrDelXZ()
     {
-        return new Vector3(delRotY * Time.deltaTime * gain, 0, -delRotX * Time.deltaTime * gain);
+        return new Vector3(delRotY * Time.deltaTime, 0, -delRotX * Time.deltaTime);
+    }
+
+    private void MoveWithHead()
+    {
+        if (ExperimentState.trialPhase == TrialPhase.FinePlacement && ExperimentState.curBlockTechnique == Technique.GlassesHead)
+        {
+            transform.Translate(RotDelYXtoScrDelXZ() * positionGain);
+            //Debug.Log(CameraCache.Main.transform.forward.x + " " + CameraCache.Main.transform.forward.y + " " + CameraCache.Main.transform.forward.z);
+        }
+    }
+
+    private void RotateWithHead()
+    {
+        if (ExperimentState.trialPhase == TrialPhase.Rotation && ExperimentState.curBlockTechnique == Technique.GlassesHead)
+        {
+            transform.Rotate(new Vector3(0, delRotY * Time.deltaTime, 0) * rotationGain);
+        }
     }
 }

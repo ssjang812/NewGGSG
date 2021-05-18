@@ -8,7 +8,6 @@ using UnityEngine;
 public class PhoneSwipeSender : MonoBehaviour
 {
     public PhotonView PV;
-    public float gain;
     public LeanFingerFilter Use = new LeanFingerFilter(true);
 
     private void Update()
@@ -28,6 +27,6 @@ public class PhoneSwipeSender : MonoBehaviour
     public Vector3 DeltaXYtoXZ()
     {
         Tuple<float, float> screenDeltaXY = ParseScreenDelta();
-        return new Vector3(screenDeltaXY.Item1, 0, screenDeltaXY.Item2) * Time.deltaTime * gain;
+        return new Vector3(screenDeltaXY.Item1, 0, screenDeltaXY.Item2) * Time.deltaTime;
     }
 }

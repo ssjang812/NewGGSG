@@ -1,9 +1,18 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ExperimentManager : MonoBehaviour
 {
+    // 중요 : 한실험은 6개의 블록으로 이루어져있다, 한블록은 10회의 수행으로 이루어져있다, 1회 수행은 3단계 페이즈로 이루어져있다(시선배치-디테일배치-각도배치).
+
+    public GameObject manipChair;
+    public GameObject guideChair;
+    public GameObject turnOffDuringExperiment;
+    public PhotonView PV;
+    private Vector3 defaultManipChairPosition;
+
     //실험 수치값 유니티를통해 받기
     public float NearLength;
     public float FarLength;
@@ -16,7 +25,6 @@ public class ExperimentManager : MonoBehaviour
     private float AngleOffsetGap;
 
     //실험동안 필요한 자료구조
-    static ExperimentState expState;    //현재 실험 진행상황
     List<ExperimentCase> expDefaultFlow;    //실험의 가장 기본 흐름
     List<List<ExperimentCase>> expAllFlow;  //실험 흐름을 6가지로 섞음 (counter balanced with Latin Square)
     ExperimentRandomValue expRandomValue;   //Near, Far에서의 거리, Angle을 10등분한 값들을 가지고있는 구조체
@@ -31,6 +39,7 @@ public class ExperimentManager : MonoBehaviour
 
     void Start()
     {
+        defaultManipChairPosition = manipChair.transform.localPosition;
         //Initinalize experiment set, we will order this set to make different experiment sequence just below.
         expDefaultFlow = new List<ExperimentCase>();
         ExperimentCase aCase;
@@ -47,10 +56,10 @@ public class ExperimentManager : MonoBehaviour
         aCase.technique = Technique.PhoneGyro;
         expDefaultFlow.Add(aCase);
         aCase.distance = Distance.Near;
-        aCase.technique = Technique.GlassesHand;
+        aCase.technique = Technique.GlassesHead;
         expDefaultFlow.Add(aCase);
         aCase.distance = Distance.Far;
-        aCase.technique = Technique.GlassesHand;
+        aCase.technique = Technique.GlassesHead;
         expDefaultFlow.Add(aCase);
 
         //Debug Code
@@ -165,15 +174,16 @@ public class ExperimentManager : MonoBehaviour
 
     public void StartExperiment()
     {
-        expState.participantNum = ExpCtrPanel.expNumber;
-        curExpFlow = expAllFlow[expState.participantNum - 1];
-        expState.curBlockNum = 1;
+        turnOffDuringExperiment.SetActive(false);
+        ExperimentState.participantNum = ExpCtrPanel.expNumber;
+        curExpFlow = expAllFlow[ExperimentState.participantNum - 1];
+        ExperimentState.curBlockNum = 1;
         SetOneBlock();
     }
 
     public void SetOneBlock()
     {
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < expRandomValue.NearPositionOffsetValues.Count; i++)
         {
             //랜덤한 index를 pop하는 식으로 랜덤값을 쓸거기때문에 한블럭을 시작할때마다 새로 복사해서 시작해야함, 원본을 지워버리면 이후에 못하기때문
             nearRandomValue.Add(expRandomValue.NearPositionOffsetValues[i]);
@@ -182,9 +192,9 @@ public class ExperimentManager : MonoBehaviour
         }
 
         //한블럭 시작 초기화
-        curExpCase = curExpFlow[expState.curBlockNum - 1];
-        expState.curBlockDistance = curExpCase.distance;
-        expState.curBlockTechnique = curExpCase.technique;
+        curExpCase = curExpFlow[ExperimentState.curBlockNum - 1];
+        ExperimentState.curBlockDistance = curExpCase.distance;
+        ExperimentState.curBlockTechnique = curExpCase.technique;
 
         SetOneTrial();
     }
@@ -192,58 +202,86 @@ public class ExperimentManager : MonoBehaviour
     //한블럭 10회 수행
     public void SetOneTrial()
     {
+        PV.RPC("RPC_OnOneTrialStart", RpcTarget.All); // trial 시작시마다 가림막 설치, 랜덤한 위치에 버튼생성을 위해 시작할때 신호를 보내줌
+
+        // 한 trial의 첫 모드는 항상 시선으로 배치로 시작
+        ExperimentState.trialPhase = TrialPhase.RoughPlacement;
+
+        // Trial 10번하면 다음 Block을 실행
         if (nearRandomValue.Count == 0)
         {
-            expState.curBlockNum++;
-            if (expState.curBlockNum > 6)
+            // 다음에 피험자가 실험 시작을 눌러 SetOneBlock()을 실행시키면 다음 블럭이 실행되도록
+            ExperimentState.curBlockNum++;
+            if (ExperimentState.curBlockNum > 6)
             {
-                //실험 종료
+                //실험 종료-----------------------------------------------------------
             }
         }
 
+        // 랜덤 값 리스트에서 이번 Trial에 사용될 랜덤값 선정
         System.Random random = new System.Random();
         int index;
 
-        if (expState.curBlockDistance == Distance.Near)
+        if (ExperimentState.curBlockDistance == Distance.Near)
         {
             index = random.Next(nearRandomValue.Count);
-            expState.curPositionOffset = nearRandomValue[index];
+            ExperimentState.curPositionOffset = nearRandomValue[index];
             nearRandomValue.RemoveAt(index);
         }
         else
         {
             index = random.Next(farRandomValue.Count);
-            expState.curPositionOffset = farRandomValue[index];
+            ExperimentState.curPositionOffset = farRandomValue[index];
             farRandomValue.RemoveAt(index);
         }
         index = random.Next(rotationRandomValue.Count);
-        expState.curRotationOffset = rotationRandomValue[index];
+        ExperimentState.curRotationOffset = rotationRandomValue[index];
         rotationRandomValue.RemoveAt(index);
 
+        // 배치와 돌리는 과정을 나눠서하기때문에 Que도 나눠서 두단계에 걸쳐서 줘야함, 여기서는 포지션 큐만, 로테이션은 상세배치 끝난후에
+        guideChair.transform.localPosition = Vector3.zero;
+        guideChair.transform.Translate(new Vector3(ExperimentState.curPositionOffset, 0, 0));
+        
+        
+
+        // 이벤트에 기능 연결시키기
+        // 이거까지하고 테스트!!
 
 
+        // 기록기능
 
-        // 현재 된거 : 전체 흐름 컨트롤과 그에따른 변수들 초기화
-        // 해야할거
-        // SetOne Trial때마다 흐릿하게 보여주기 구현 : 흐릿하게 보여주는거에는 인터랙션 달지말고, 생성한(그냥 투명하게해뒀다가 위치만 옮겨줘도될듯) 거에만 인터랙션모듈달아둬서 인풋에 영향받도록
-        // 정답체크하는 파트
-        // 인터랙션 모듈들 통합 + 모드에 따라 한가지 모드만 작동하도록
-        // 이벤트에 기능 연결시키기 + csv 기록
+        // 추가로 중간부터 시작할수있는 기능 있어야할듯 : 원하는 블록번호 넣는 칸 + 중간부터 시작버튼만 있으면 쉽게 만들듯하다
     }
 
-    public void CheckRoughPlament()
-    {
-        // 인터랙션 모드 변경
-    }
 
-    public void CheckFinePlacement()
+    // 한번의 trial에는 3가지의 페이즈가 있음, 사용자 입력때마다 상태체크 or 정답체크하는 파트, 특정상태 or 정답이면 상호작용모드만 바꿔주면 된다.
+    public void PhaseCheck()
     {
-        // 각도조작으로 변경
-    }
-
-    public void CheckRotation()
-    {
-        // 다음 trial 실행
-        SetOneTrial();
+        if(ExperimentState.trialPhase == TrialPhase.RoughPlacement)
+        {
+            // 그냥 시선배치니까 어느정도 근처에 배치되면 ok
+            if(Vector3.Distance(guideChair.transform.position, manipChair.transform.position) < 1f)
+            {
+                ExperimentState.trialPhase = TrialPhase.FinePlacement;
+            }
+        }
+        else if(ExperimentState.trialPhase == TrialPhase.FinePlacement)
+        {
+            // 정답체크해서 맞으면 각도모드로 바꿔주고 아니면 말고
+            if (Vector3.Distance(guideChair.transform.position, manipChair.transform.position) < 0.15f)
+            {
+                guideChair.transform.rotation = Quaternion.identity;
+                guideChair.transform.Rotate(new Vector3(0, ExperimentState.curRotationOffset, 0));
+                ExperimentState.trialPhase = TrialPhase.Rotation;
+            }
+        }
+        else
+        {
+            // 정답체크해서 맞으면 다음 trial 호출 (세번째 페이즈까지 완료하면 다음 trial 호출)
+            if (Vector3.Angle(guideChair.transform.forward, manipChair.transform.forward) < 5f)
+            {
+                SetOneTrial();
+            }
+        }
     }
 }
