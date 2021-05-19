@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class MoveObjWithHead : MonoBehaviour
 {
+    public float positionGain;
+    public float rotationGain;
     float rotY;
     float rotX;
     float prerotY;
     float prerotX;
     float delRotY;
     float delRotX;
-    public float positionGain;
-    public float rotationGain;
+    private bool isPointerDown = false;
 
     void Start()
     {
@@ -20,14 +21,29 @@ public class MoveObjWithHead : MonoBehaviour
         rotX = CameraCache.Main.transform.rotation.x;
         prerotY = rotY;
         prerotX = rotX;
+        RPC_PhonetoGlasses.event_OnPointerDown.AddListener(SetPointerDownTrue);
+        RPC_PhonetoGlasses.event_OnPointerUp.AddListener(SetPointerDownTrueFalse);
     }
 
 
     void Update()
     {
         HeadRotDelYXUpdate();
-        MoveWithHead();
-        RotateWithHead();
+
+        if (ExperimentState.trialPhase == TrialPhase.FinePlacement && ExperimentState.curBlockTechnique == Technique.GlassesHead)
+        {
+            if (isPointerDown)
+            {
+                MoveWithHead();
+            }
+        }
+        else if (ExperimentState.trialPhase == TrialPhase.Rotation && ExperimentState.curBlockTechnique == Technique.GlassesHead)
+        {
+            if (isPointerDown)
+            {
+                RotateWithHead();
+            }
+        }
     }
 
     private void HeadRotDelYXUpdate()
@@ -47,18 +63,22 @@ public class MoveObjWithHead : MonoBehaviour
 
     private void MoveWithHead()
     {
-        if (ExperimentState.trialPhase == TrialPhase.FinePlacement && ExperimentState.curBlockTechnique == Technique.GlassesHead)
-        {
-            transform.Translate(RotDelYXtoScrDelXZ() * positionGain);
-            //Debug.Log(CameraCache.Main.transform.forward.x + " " + CameraCache.Main.transform.forward.y + " " + CameraCache.Main.transform.forward.z);
-        }
+        transform.Translate(RotDelYXtoScrDelXZ() * positionGain);
+        Debug.Log(CameraCache.Main.transform.forward.x + " " + CameraCache.Main.transform.forward.y + " " + CameraCache.Main.transform.forward.z);
     }
 
     private void RotateWithHead()
     {
-        if (ExperimentState.trialPhase == TrialPhase.Rotation && ExperimentState.curBlockTechnique == Technique.GlassesHead)
-        {
-            transform.Rotate(new Vector3(0, delRotY * Time.deltaTime, 0) * rotationGain);
-        }
+        transform.Rotate(new Vector3(0, delRotY * Time.deltaTime, 0) * rotationGain);
+    }
+
+    private void SetPointerDownTrue()
+    {
+        isPointerDown = true;
+    }
+
+    private void SetPointerDownTrueFalse()
+    {
+        isPointerDown = false;
     }
 }

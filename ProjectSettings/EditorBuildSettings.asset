@@ -5,40 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Samples/Mixed Reality Toolkit Foundation/2.6.1/Scene System Resources/DefaultManagerScene.unity
-    guid: ae7bb08d297fb69408695d8de0962524
-  - enabled: 0
-    path: Assets/Samples/Mixed Reality Toolkit Examples/2.6.1/Demos - EyeTracking/Scenes/EyeTrackingDemo-00-RootScene.unity
-    guid: 27c3fbe0128089f48994cdc6af8668fc
-  - enabled: 0
-    path: Assets/Samples/Mixed Reality Toolkit Examples/2.6.1/Demos - EyeTracking/Scenes/EyeTrackingDemo-01-BasicSetup.unity
-    guid: 3ac2cf3aa0e281340babd2053d8b7d46
-  - enabled: 0
-    path: Assets/Samples/Mixed Reality Toolkit Examples/2.6.1/Demos - EyeTracking/Scenes/EyeTrackingDemo-02-TargetSelection.unity
-    guid: 55643f7e4eceb734784192b162f565e0
-  - enabled: 0
-    path: Assets/Samples/Mixed Reality Toolkit Examples/2.6.1/Demos - EyeTracking/Scenes/EyeTrackingDemo-03-Navigation.unity
-    guid: 5df475f0bf57b1f488d59e0e16040d9a
-  - enabled: 0
-    path: Assets/Samples/Mixed Reality Toolkit Examples/2.6.1/Demos - EyeTracking/Scenes/EyeTrackingDemo-04-TargetPositioning.unity
-    guid: 91ded1f5ef2ae854ba4ac94eca7a2494
-  - enabled: 0
-    path: Assets/Samples/Mixed Reality Toolkit Examples/2.6.1/Demos - EyeTracking/Scenes/EyeTrackingDemo-05-Visualizer.unity
-    guid: 2d6c43a82f3a88c4dbdc3b5e99a68d8a
-  - enabled: 0
-    path: Assets/Samples/Mixed Reality Toolkit Foundation/2.6.1/Scene System Resources/DefaultLightingScene.unity
-    guid: 7e54e36c44f826c438c95da79f8de638
-  - enabled: 0
-    path: Assets/01.Scenes/phoneContrlTest.unity
-    guid: 8cc66adac95ca9c4fad1ba74e2778b27
   - enabled: 1
     path: Assets/01.Scenes/NetworkLobby.unity
     guid: 171a9b3ed671da74c88786a7f808b2bc
-  - enabled: 1
+  - enabled: 0
     path: Assets/01.Scenes/SmartphoneConnected.unity
     guid: 5b3b85b7dfe3abb4b9454f1b072ad96b
-  - enabled: 0
+  - enabled: 1
     path: Assets/01.Scenes/SmartglassConnected.unity
     guid: 958fd1119944983469ee879808045521
   m_configObjects:

@@ -1,13 +1,14 @@
-﻿using Photon.Pun;
+﻿using Microsoft.MixedReality.Toolkit.Experimental.Dwell;
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ExperimentManager : MonoBehaviour
 {
     // 중요 : 한실험은 6개의 블록으로 이루어져있다, 한블록은 10회의 수행으로 이루어져있다, 1회 수행은 3단계 페이즈로 이루어져있다(시선배치-디테일배치-각도배치).
-
     public GameObject manipChair;
     public GameObject guideChair;
     public GameObject turnOffDuringExperiment;
@@ -22,6 +23,8 @@ public class ExperimentManager : MonoBehaviour
     public float FarLength;
     public float MinAngle;
     public float MaxAngle;
+
+
 
     //수치값 최소 최대값을 10등분 하기위해 사이값 저장
     private float NearOffsetGap;
@@ -43,8 +46,10 @@ public class ExperimentManager : MonoBehaviour
 
     void Start()
     {
+        RPC_PhonetoGlasses.event_OnPointerUp.AddListener(PhaseCheck);
         instructionCanvas.SetActive(false);
         defaultManipChairPosition = manipChair.transform.localPosition;
+
         //Initinalize experiment set, we will order this set to make different experiment sequence just below.
         expDefaultFlow = new List<ExperimentCase>();
         ExperimentCase aCase;
@@ -188,6 +193,10 @@ public class ExperimentManager : MonoBehaviour
 
     public void SetOneBlock()
     {
+        //혹시모르니 세팅시작할때 한번 비워주고 새로
+        nearRandomValue.Clear();
+        farRandomValue.Clear();
+        rotationRandomValue.Clear();
         instructionCanvas.SetActive(false);
         for (int i = 0; i < expRandomValue.NearPositionOffsetValues.Count; i++)
         {
@@ -209,19 +218,21 @@ public class ExperimentManager : MonoBehaviour
     public void SetOneTrial()
     {
         PV.RPC("RPC_OnOneTrialStart", RpcTarget.All); // trial 시작시마다 가림막 설치, 랜덤한 위치에 버튼생성을 위해 시작할때 신호를 보내줌
+        manipChair.transform.localPosition = defaultManipChairPosition;
+        manipChair.transform.rotation = Quaternion.identity;
 
         // 한 trial의 첫 모드는 항상 시선으로 배치로 시작
         ExperimentState.trialPhase = TrialPhase.RoughPlacement;
 
-        // Trial 10번하면 새로운 의자 생성을 멈춤, 설문시간을 가진후 다시 시작을 누르면 다음 Block을 실행
-        if (nearRandomValue.Count == 0)
+        // Trial 10번하면 새로운 의자 생성을 멈춤, 설문시간을 가진후 다시 시작을 누르면 다음 Block을 실행 : 어느경우에느 사용되는 rotation random 갯수로, 거리는 near, far 경우가 갈림
+        if (rotationRandomValue.Count == 0)
         {
             ExperimentState.curBlockDistance = Distance.Null;
             ExperimentState.curBlockTechnique = Technique.Null;
             ExperimentState.trialPhase = TrialPhase.Null;
             ExperimentState.curPositionOffset = 0;
             ExperimentState.curRotationOffset = 0;
-            manipChair.transform.localPosition = defaultManipChairPosition;
+
             // 실험 종료
             if (ExperimentState.curBlockNum == 6)
             {
@@ -229,7 +240,7 @@ public class ExperimentManager : MonoBehaviour
                 nextBlockBtn.SetActive(false);
             } else if(ExperimentState.curBlockNum < 6)
             {
-                instruction.SetText($"<size=35><b>Block{ExperimentState.curBlockNum - 1} is over</b></size>\n\nPlease call coordinator and fill out the questionnaire.");
+                instruction.SetText($"<size=35><b>Block{ExperimentState.curBlockNum} is over</b></size>\n\nPlease call coordinator and fill out the questionnaire.");
                 ExperimentState.curBlockNum++;
             }
             instructionCanvas.SetActive(true);
@@ -258,7 +269,12 @@ public class ExperimentManager : MonoBehaviour
 
         // 배치와 돌리는 과정을 나눠서하기때문에 Que도 나눠서 두단계에 걸쳐서 줘야함, 여기서는 포지션 큐만, 로테이션은 상세배치 끝난후에
         guideChair.transform.localPosition = Vector3.zero;
+        guideChair.transform.rotation = Quaternion.identity;
         guideChair.transform.Translate(new Vector3(ExperimentState.curPositionOffset, 0, 0));
+
+
+        // 실행할때마다 가림막 나오는거 안되고있다.
+        // 각 블록마다 어떻게 배치해야하는지 설명하는 페이지를 만들까, 아니면 말로설명할까 음... 연습 세션을 넣을까
         // 기록기능
         // 추가로 중간부터 시작할수있는 기능 있어야할듯 : 원하는 블록번호 넣는 칸 + 중간부터 시작버튼만 있으면 쉽게 만들듯하다
     }
@@ -270,7 +286,7 @@ public class ExperimentManager : MonoBehaviour
         if(ExperimentState.trialPhase == TrialPhase.RoughPlacement)
         {
             // 그냥 시선배치니까 어느정도 근처에 배치되면 ok
-            if(Vector3.Distance(guideChair.transform.position, manipChair.transform.position) < 1f)
+            if(Vector3.Distance(guideChair.transform.position, manipChair.transform.position) < 2f)
             {
                 ExperimentState.trialPhase = TrialPhase.FinePlacement;
             }
@@ -288,7 +304,7 @@ public class ExperimentManager : MonoBehaviour
         else
         {
             // 정답체크해서 맞으면 다음 trial 호출 (세번째 페이즈까지 완료하면 다음 trial 호출)
-            if (Vector3.Angle(guideChair.transform.forward, manipChair.transform.forward) < 5f)
+            if (Vector3.Angle(guideChair.transform.forward, manipChair.transform.forward) < 8f)
             {
                 SetOneTrial();
             }

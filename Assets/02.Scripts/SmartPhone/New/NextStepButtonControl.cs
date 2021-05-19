@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class NextStepButtonControl : MonoBehaviour
 {
+    public GameObject NextStepBtn;
     public float pressThreshHold = 1f;
     private float timer = 0.0f;
     private bool isPointerDown = false;
@@ -41,11 +43,13 @@ public class NextStepButtonControl : MonoBehaviour
 
     private void SetActiveFalse()
     {
-        gameObject.SetActive(false);
+        NextStepBtn.SetActive(false);
+        isPointerDown = false;
     }
 
     private void SetActiveTrue()
     {
-        gameObject.SetActive(true);
+        NextStepBtn.SetActive(true);
+        isPointerDown = false;
     }
 }
