@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ExperimentManager : MonoBehaviour
@@ -10,6 +11,9 @@ public class ExperimentManager : MonoBehaviour
     public GameObject manipChair;
     public GameObject guideChair;
     public GameObject turnOffDuringExperiment;
+    public GameObject instructionCanvas;
+    public TextMeshProUGUI instruction;
+    public GameObject nextBlockBtn;
     public PhotonView PV;
     private Vector3 defaultManipChairPosition;
 
@@ -39,6 +43,7 @@ public class ExperimentManager : MonoBehaviour
 
     void Start()
     {
+        instructionCanvas.SetActive(false);
         defaultManipChairPosition = manipChair.transform.localPosition;
         //Initinalize experiment set, we will order this set to make different experiment sequence just below.
         expDefaultFlow = new List<ExperimentCase>();
@@ -183,6 +188,7 @@ public class ExperimentManager : MonoBehaviour
 
     public void SetOneBlock()
     {
+        instructionCanvas.SetActive(false);
         for (int i = 0; i < expRandomValue.NearPositionOffsetValues.Count; i++)
         {
             //랜덤한 index를 pop하는 식으로 랜덤값을 쓸거기때문에 한블럭을 시작할때마다 새로 복사해서 시작해야함, 원본을 지워버리면 이후에 못하기때문
@@ -207,15 +213,27 @@ public class ExperimentManager : MonoBehaviour
         // 한 trial의 첫 모드는 항상 시선으로 배치로 시작
         ExperimentState.trialPhase = TrialPhase.RoughPlacement;
 
-        // Trial 10번하면 다음 Block을 실행
+        // Trial 10번하면 새로운 의자 생성을 멈춤, 설문시간을 가진후 다시 시작을 누르면 다음 Block을 실행
         if (nearRandomValue.Count == 0)
         {
-            // 다음에 피험자가 실험 시작을 눌러 SetOneBlock()을 실행시키면 다음 블럭이 실행되도록
-            ExperimentState.curBlockNum++;
-            if (ExperimentState.curBlockNum > 6)
+            ExperimentState.curBlockDistance = Distance.Null;
+            ExperimentState.curBlockTechnique = Technique.Null;
+            ExperimentState.trialPhase = TrialPhase.Null;
+            ExperimentState.curPositionOffset = 0;
+            ExperimentState.curRotationOffset = 0;
+            manipChair.transform.localPosition = defaultManipChairPosition;
+            // 실험 종료
+            if (ExperimentState.curBlockNum == 6)
             {
-                //실험 종료-----------------------------------------------------------
+                instruction.SetText($"<size=35><b>All trials are over</b></size>\n\nPlease call coordinator and fill out the questionnaire.");
+                nextBlockBtn.SetActive(false);
+            } else if(ExperimentState.curBlockNum < 6)
+            {
+                instruction.SetText($"<size=35><b>Block{ExperimentState.curBlockNum - 1} is over</b></size>\n\nPlease call coordinator and fill out the questionnaire.");
+                ExperimentState.curBlockNum++;
             }
+            instructionCanvas.SetActive(true);
+            return;
         }
 
         // 랜덤 값 리스트에서 이번 Trial에 사용될 랜덤값 선정
@@ -241,15 +259,7 @@ public class ExperimentManager : MonoBehaviour
         // 배치와 돌리는 과정을 나눠서하기때문에 Que도 나눠서 두단계에 걸쳐서 줘야함, 여기서는 포지션 큐만, 로테이션은 상세배치 끝난후에
         guideChair.transform.localPosition = Vector3.zero;
         guideChair.transform.Translate(new Vector3(ExperimentState.curPositionOffset, 0, 0));
-        
-        
-
-        // 이벤트에 기능 연결시키기
-        // 이거까지하고 테스트!!
-
-
         // 기록기능
-
         // 추가로 중간부터 시작할수있는 기능 있어야할듯 : 원하는 블록번호 넣는 칸 + 중간부터 시작버튼만 있으면 쉽게 만들듯하다
     }
 

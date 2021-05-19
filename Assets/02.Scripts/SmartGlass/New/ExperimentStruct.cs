@@ -5,21 +5,24 @@ using UnityEngine;
 enum Distance
 {
     Near,
-    Far
+    Far,
+    Null
 }
 
 enum Technique
 {
     PhoneSwipe,
     PhoneGyro,
-    GlassesHead
+    GlassesHead,
+    Null
 }
 
 enum TrialPhase
 {
     RoughPlacement,
     FinePlacement,
-    Rotation
+    Rotation,
+    Null
 }
 
 struct ExperimentCase
