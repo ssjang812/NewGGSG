@@ -33,7 +33,7 @@ public class MoveObjWithSwipe : MonoBehaviour
 
     private void MoveWithSwipe()
     {
-            transform.Translate(RPC_PhonetoGlasses.swipeDelta * positionGain);
+            transform.Translate(RPC_PhonetoGlasses.swipeDelta * positionGain, Space.World);
     }
 
     private void RoatateWithSwipe()

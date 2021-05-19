@@ -34,7 +34,7 @@ public class MoveObjWithGyro : MonoBehaviour
 
     private void MoveWithGyro()
     {
-        transform.Translate(RPC_PhonetoGlasses.gyroDelta * positionGain);      
+        transform.Translate(RPC_PhonetoGlasses.gyroDelta * positionGain, Space.World);      
     }
 
     private void RotateWithGyro()

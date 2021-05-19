@@ -63,7 +63,7 @@ public class MoveObjWithHead : MonoBehaviour
 
     private void MoveWithHead()
     {
-        transform.Translate(RotDelYXtoScrDelXZ() * positionGain);
+        transform.Translate(RotDelYXtoScrDelXZ() * positionGain, Space.World);
         Debug.Log(CameraCache.Main.transform.forward.x + " " + CameraCache.Main.transform.forward.y + " " + CameraCache.Main.transform.forward.z);
     }
 
