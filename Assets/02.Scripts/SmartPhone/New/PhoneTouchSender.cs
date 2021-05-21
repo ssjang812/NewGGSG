@@ -9,20 +9,20 @@ public class PhoneTouchSender : MonoBehaviour
 
     public void OnChairButtonDown()
     {
-        PV.RPC("RPC_OnChairButtonDown", RpcTarget.All);
+        PV.RPC("RPC_ChairButtonDown", RpcTarget.All);
     }
     public void OnChairButtonUp()
     {
-        PV.RPC("RPC_OnChairButtonUp", RpcTarget.All);
+        PV.RPC("RPC_ChairButtonUp", RpcTarget.All);
     }
 
     public void OnPointerDown()
     {
-        PV.RPC("RPC_OnPointerDown", RpcTarget.All);
+        PV.RPC("RPC_PointerDown", RpcTarget.All);
     }
 
     public void OnPointerUp()
     {
-        PV.RPC("RPC_OnPointerUp", RpcTarget.All);
+        PV.RPC("RPC_PointerUp", RpcTarget.All);
     }
 }

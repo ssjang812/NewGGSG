@@ -12,7 +12,8 @@ public class ExperimentManager : MonoBehaviour
     public GameObject manipChair;
     public GameObject guideChair;
     public GameObject turnOffDuringExperiment;
-    public GameObject instructionCanvas;
+    public ExpCtrPanel expCtrPanel;
+    public GameObject instructionPanel;
     public TextMeshProUGUI instruction;
     public GameObject nextBlockBtn;
     public PhotonView PV;
@@ -46,8 +47,17 @@ public class ExperimentManager : MonoBehaviour
 
     void Start()
     {
-        RPC_PhonetoGlasses.event_OnPointerUp.AddListener(PhaseCheck);
-        instructionCanvas.SetActive(false);
+        ExperimentState.participantNum = -1;
+        ExperimentState.curBlockNum = -1;
+        ExperimentState.curBlockDistance = Distance.Null;
+        ExperimentState.curBlockTechnique = Technique.Null;
+        ExperimentState.trialPhase = TrialPhase.Null;
+        ExperimentState.curPositionOffset = -1;
+        ExperimentState.curRotationOffset = -1;
+
+        RPC_PhonetoGlasses.event_pointerUp.AddListener(PhaseCheck);
+        RPC_PhonetoGlasses.event_nextButtonDeactivated.AddListener(SetActiveGuideChair);
+        instructionPanel.SetActive(false);
         defaultManipChairPosition = manipChair.transform.localPosition;
 
         //Initinalize experiment set, we will order this set to make different experiment sequence just below.
@@ -99,36 +109,36 @@ public class ExperimentManager : MonoBehaviour
         expAllFlow[1].Add(expDefaultFlow[1]);
         expAllFlow[1].Add(expDefaultFlow[4]);
         expAllFlow[1].Add(expDefaultFlow[5]);
-        expAllFlow[1].Add(expDefaultFlow[2]);
         expAllFlow[1].Add(expDefaultFlow[3]);
+        expAllFlow[1].Add(expDefaultFlow[2]);
 
         expAllFlow[2].Add(expDefaultFlow[2]);
         expAllFlow[2].Add(expDefaultFlow[3]);
-        expAllFlow[2].Add(expDefaultFlow[0]);
         expAllFlow[2].Add(expDefaultFlow[1]);
+        expAllFlow[2].Add(expDefaultFlow[0]);
         expAllFlow[2].Add(expDefaultFlow[4]);
         expAllFlow[2].Add(expDefaultFlow[5]);
 
         expAllFlow[3].Add(expDefaultFlow[2]);
         expAllFlow[3].Add(expDefaultFlow[3]);
-        expAllFlow[3].Add(expDefaultFlow[4]);
         expAllFlow[3].Add(expDefaultFlow[5]);
-        expAllFlow[3].Add(expDefaultFlow[0]);
+        expAllFlow[3].Add(expDefaultFlow[4]);
         expAllFlow[3].Add(expDefaultFlow[1]);
+        expAllFlow[3].Add(expDefaultFlow[0]);
 
-        expAllFlow[4].Add(expDefaultFlow[4]);
         expAllFlow[4].Add(expDefaultFlow[5]);
+        expAllFlow[4].Add(expDefaultFlow[4]);
         expAllFlow[4].Add(expDefaultFlow[0]);
         expAllFlow[4].Add(expDefaultFlow[1]);
         expAllFlow[4].Add(expDefaultFlow[2]);
         expAllFlow[4].Add(expDefaultFlow[3]);
 
-        expAllFlow[5].Add(expDefaultFlow[4]);
         expAllFlow[5].Add(expDefaultFlow[5]);
+        expAllFlow[5].Add(expDefaultFlow[4]);
         expAllFlow[5].Add(expDefaultFlow[2]);
         expAllFlow[5].Add(expDefaultFlow[3]);
-        expAllFlow[5].Add(expDefaultFlow[0]);
         expAllFlow[5].Add(expDefaultFlow[1]);
+        expAllFlow[5].Add(expDefaultFlow[0]);
 
         //Debug Code
         /*
@@ -184,10 +194,11 @@ public class ExperimentManager : MonoBehaviour
 
     public void StartExperiment()
     {
-        turnOffDuringExperiment.SetActive(false);
-        ExperimentState.participantNum = ExpCtrPanel.expNumber;
+        // 테스트 할때는 주석처리하자
+        //turnOffDuringExperiment.SetActive(false);
+        ExperimentState.participantNum = expCtrPanel.participantNumber;
+        ExperimentState.curBlockNum = expCtrPanel.blockNumber;
         curExpFlow = expAllFlow[ExperimentState.participantNum - 1];
-        ExperimentState.curBlockNum = 1;
         SetOneBlock();
     }
 
@@ -197,7 +208,7 @@ public class ExperimentManager : MonoBehaviour
         nearRandomValue.Clear();
         farRandomValue.Clear();
         rotationRandomValue.Clear();
-        instructionCanvas.SetActive(false);
+        instructionPanel.SetActive(false);
         for (int i = 0; i < expRandomValue.NearPositionOffsetValues.Count; i++)
         {
             //랜덤한 index를 pop하는 식으로 랜덤값을 쓸거기때문에 한블럭을 시작할때마다 새로 복사해서 시작해야함, 원본을 지워버리면 이후에 못하기때문
@@ -211,13 +222,14 @@ public class ExperimentManager : MonoBehaviour
         ExperimentState.curBlockDistance = curExpCase.distance;
         ExperimentState.curBlockTechnique = curExpCase.technique;
 
+        Debug.Log(ExperimentState.curBlockDistance);
         SetOneTrial();
     }
 
     //한블럭 10회 수행
     public void SetOneTrial()
     {
-        PV.RPC("RPC_OnOneTrialStart", RpcTarget.All); // trial 시작시마다 가림막 설치, 랜덤한 위치에 버튼생성을 위해 시작할때 신호를 보내줌
+        PV.RPC("RPC_OneTrialStart", RpcTarget.All); // trial 시작시마다 가림막 설치, 랜덤한 위치에 버튼생성을 위해 시작할때 신호를 보내줌
         manipChair.transform.localPosition = defaultManipChairPosition;
         manipChair.transform.rotation = Quaternion.identity;
 
@@ -243,7 +255,7 @@ public class ExperimentManager : MonoBehaviour
                 instruction.SetText($"<size=35><b>Block{ExperimentState.curBlockNum} is over</b></size>\n\nPlease call coordinator and fill out the questionnaire.");
                 ExperimentState.curBlockNum++;
             }
-            instructionCanvas.SetActive(true);
+            instructionPanel.SetActive(true);
             return;
         }
 
@@ -272,6 +284,8 @@ public class ExperimentManager : MonoBehaviour
         guideChair.transform.rotation = Quaternion.identity;
         guideChair.transform.Translate(new Vector3(ExperimentState.curPositionOffset, 0, 0));
 
+        // 테스트 할때는 주석처리하자
+        guideChair.SetActive(false); // 스마트폰의 가림막을 1초 누르면 다시 킬거임
 
         // 실행할때마다 가림막 나오는거 안되고있다.
         // 각 블록마다 어떻게 배치해야하는지 설명하는 페이지를 만들까, 아니면 말로설명할까 음... 연습 세션을 넣을까
@@ -296,8 +310,16 @@ public class ExperimentManager : MonoBehaviour
             // 정답체크해서 맞으면 각도모드로 바꿔주고 아니면 말고
             if (Vector3.Distance(guideChair.transform.position, manipChair.transform.position) < 0.15f)
             {
+                System.Random random = new System.Random();
                 guideChair.transform.rotation = Quaternion.identity;
-                guideChair.transform.Rotate(new Vector3(0, ExperimentState.curRotationOffset, 0));
+                if(random.Next(2) == 0)
+                {
+                    guideChair.transform.Rotate(new Vector3(0, ExperimentState.curRotationOffset, 0));
+                }
+                else
+                {
+                    guideChair.transform.Rotate(new Vector3(0, -ExperimentState.curRotationOffset, 0));
+                }
                 ExperimentState.trialPhase = TrialPhase.Rotation;
             }
         }
@@ -309,5 +331,10 @@ public class ExperimentManager : MonoBehaviour
                 SetOneTrial();
             }
         }
+    }
+
+    private void SetActiveGuideChair()
+    {
+        guideChair.SetActive(true);
     }
 }

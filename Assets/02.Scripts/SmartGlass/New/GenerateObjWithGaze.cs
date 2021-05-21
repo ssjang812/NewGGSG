@@ -14,7 +14,12 @@ public class GenerateObjWithGaze : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RPC_PhonetoGlasses.event_OnChairButtonUp.AddListener(PlaceWithGaze);
+        RPC_PhonetoGlasses.event_chairButtonUp.AddListener(PlaceWithGaze);
+    }
+
+    private void Update()
+    { 
+
     }
 
     /*
@@ -30,9 +35,15 @@ public class GenerateObjWithGaze : MonoBehaviour
     {
         if (ExperimentState.trialPhase == TrialPhase.RoughPlacement)
         {
-            Vector3 hitp = EyeTrackingProvider.HitPosition;
-            transform.position = hitp;
-            transform.rotation = Quaternion.identity;
+            if (EyeTrackingProvider.GazeTarget != null)
+            {
+                if (EyeTrackingProvider.GazeTarget.tag == "PlaceableWithGaze")
+                {
+                    Vector3 hitp = EyeTrackingProvider.HitPosition;
+                    transform.position = hitp;
+                    transform.rotation = Quaternion.identity;
+                }
+            }
         }
     }
 }

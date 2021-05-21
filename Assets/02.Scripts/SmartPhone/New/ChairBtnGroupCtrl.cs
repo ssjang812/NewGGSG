@@ -7,7 +7,7 @@ public class ChairBtnGroupCtrl : MonoBehaviour
     public GameObject[] chairButton;
     void Start()
     {
-        RPC_GlassestoPhone.event_OnOneTrialStart.AddListener(ActivateRandomButton);
+        RPC_GlassestoPhone.event_oneTrialStart.AddListener(ActivateRandomButton);
     }
 
     private void ActivateRandomButton()

@@ -10,8 +10,8 @@ public class MoveObjWithSwipe : MonoBehaviour
 
     void Start()
     {
-        RPC_PhonetoGlasses.event_OnPointerDown.AddListener(SetPointerDownTrue);
-        RPC_PhonetoGlasses.event_OnPointerUp.AddListener(SetPointerDownTrueFalse);
+        RPC_PhonetoGlasses.event_pointerDown.AddListener(SetPointerDownTrue);
+        RPC_PhonetoGlasses.event_pointerUp.AddListener(SetPointerDownTrueFalse);
     }
 
     private void Update()

@@ -6,17 +6,17 @@ using UnityEngine.Events;
 
 public class RPC_GlassestoPhone : MonoBehaviour
 {
-    public static UnityEvent event_OnOneTrialStart;
+    public static UnityEvent event_oneTrialStart;
     void Start()
     {
-        if (event_OnOneTrialStart == null)
-            event_OnOneTrialStart = new UnityEvent();
+        if (event_oneTrialStart == null)
+            event_oneTrialStart = new UnityEvent();
     }
 
     [PunRPC]
-    void RPC_OnOneTrialStart()
+    void RPC_OneTrialStart()
     {
-        event_OnOneTrialStart.Invoke();
+        event_oneTrialStart.Invoke();
         Debug.Log("RPC_OnOneTrialStart");
     }
 }

@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class NextStepButtonControl : MonoBehaviour
 {
+    public PhotonView PV;
     public GameObject NextStepBtn;
     public float pressThreshHold = 1f;
     private float timer = 0.0f;
@@ -12,7 +14,7 @@ public class NextStepButtonControl : MonoBehaviour
 
     void Start()
     {
-        RPC_GlassestoPhone.event_OnOneTrialStart.AddListener(SetActiveTrue);
+        RPC_GlassestoPhone.event_oneTrialStart.AddListener(SetActiveTrue);
     }
 
     void Update()
@@ -45,6 +47,7 @@ public class NextStepButtonControl : MonoBehaviour
     {
         NextStepBtn.SetActive(false);
         isPointerDown = false;
+        PV.RPC("RPC_NextButtonDeactivated", RpcTarget.All);
     }
 
     private void SetActiveTrue()

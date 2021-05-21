@@ -3,7 +3,47 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Sphere_FindSameImage
+  - Cube_FindSameObject
+  - WorldEvent
+  - Spot4_PlaceWithEyeGaze
+  - Cylinder_FindSameImage
+  - FindSameImageScene
+  - Sphere_FindSameObject
+  - Capsule_FindSameObject
+  - PracticeSelectButton
+  - Spot3_PlaceWithEyeGaze
+  - RetrieveInfoScene
+  - Cube_RetrieveInfo
+  - Capsule_FindSameImage
+  - Cube_FindSameImage
+  - FindSameObjectScene
+  - Sphere_RetrieveInfo
+  - PlaceWithEyeGazeScene
+  - ExpStartButton
+  - Cylinder_FindSameObject
+  - Spot1_PlaceWithEyeGaze
+  - Spot2_PlaceWithEyeGaze
+  - Cylinder_RetrieveInfo
+  - Capsule_RetrieveInfo
+  - CylinderButton_FindSameImage
+  - FindSameImageCanvas
+  - RetrieveInfoCanvas
+  - PlaceWithEyeGazeCanvas
+  - SphereButton_FindSameObject
+  - CapsuleButton_PlaceWithEyeGaze
+  - FindSameObjectCanvas
+  - SphereButton_FindSameImage
+  - CubeButton_FindSameImage
+  - CylinderButton_PlaceWithEyeGaze
+  - CylinderButton_FindSameObject
+  - CubeButton_PlaceWithEyeGaze
+  - CubeButton_FindSameObject
+  - CapsuleButton_FindSameObject
+  - SphereButton_PlaceWithEyeGaze
+  - CapsuleButton_FindSameImage
+  - PlaceableWithGaze
   layers:
   - Default
   - TransparentFX

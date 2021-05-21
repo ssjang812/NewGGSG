@@ -7,23 +7,39 @@ using UnityEngine;
 
 public class ExpCtrPanel : MonoBehaviour
 {
-    public static int expNumber;
-    public PinchSlider PinchSlider;
-    public TextMeshPro ExpNumText;
+    public int participantNumber;
+    public int blockNumber;
+    public PinchSlider ParticipantSlider;
+    public PinchSlider BlockSlider;
+    public TextMeshPro ParticipantNumText;
+    public TextMeshPro BlockNumText;
+
 
     private void Start()
     {
-        ExpNumText.text = ((int)Math.Round(PinchSlider.SliderValue * 5 + 1)).ToString();
+        ParticipantNumText.text = ((int)Math.Round(ParticipantSlider.SliderValue * 5 + 1)).ToString();
+        BlockNumText.text = ((int)Math.Round(BlockSlider.SliderValue * 5 + 1)).ToString();
     }
 
-    public void SliderValuetoExpNum()
+    public void SliderValuetoParticipantNum()
     {
         int temp;
-        temp = (int)Math.Round(PinchSlider.SliderValue * 5 + 1);
-        if (temp != expNumber)
+        temp = (int)Math.Round(ParticipantSlider.SliderValue * 5 + 1);
+        if (temp != participantNumber)
         {
-            expNumber = temp;
-            ExpNumText.text = expNumber.ToString();
+            participantNumber = temp;
+            ParticipantNumText.text = participantNumber.ToString();
+        }
+    }
+
+    public void SliderValuetoBlockNum()
+    {
+        int temp;
+        temp = (int)Math.Round(BlockSlider.SliderValue * 5 + 1);
+        if (temp != blockNumber)
+        {
+            blockNumber = temp;
+            BlockNumText.text = blockNumber.ToString();
         }
     }
 }
