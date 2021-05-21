@@ -42830,11 +42830,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2038988385, guid: f276c52b6cb722c48ad33ee1290ef1a3, type: 3}
       propertyPath: positionGain
-      value: 200
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 2038988385, guid: f276c52b6cb722c48ad33ee1290ef1a3, type: 3}
       propertyPath: rotationGain
-      value: 40000
+      value: 65000
       objectReference: {fileID: 0}
     - target: {fileID: 2038988385, guid: f276c52b6cb722c48ad33ee1290ef1a3, type: 3}
       propertyPath: experimentManager
@@ -42842,11 +42842,11 @@ PrefabInstance:
       objectReference: {fileID: 1252085634}
     - target: {fileID: 2038988386, guid: f276c52b6cb722c48ad33ee1290ef1a3, type: 3}
       propertyPath: positionGain
-      value: 1
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 2038988386, guid: f276c52b6cb722c48ad33ee1290ef1a3, type: 3}
       propertyPath: rotationGain
-      value: 200
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 2038988386, guid: f276c52b6cb722c48ad33ee1290ef1a3, type: 3}
       propertyPath: experimentManager
@@ -42858,7 +42858,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2038988387, guid: f276c52b6cb722c48ad33ee1290ef1a3, type: 3}
       propertyPath: rotationGain
-      value: 75
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 2038988387, guid: f276c52b6cb722c48ad33ee1290ef1a3, type: 3}
       propertyPath: experimentManager
