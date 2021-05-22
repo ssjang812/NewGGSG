@@ -16,14 +16,14 @@ public class MoveObjWithGyro : MonoBehaviour
 
     private void Update()
     {
-        if (ExperimentState.trialPhase == TrialPhase.FinePlacement && ExperimentState.curBlockTechnique == Technique.PhoneGyro)
+        if (ExperimentState.curTrialPhase == TrialPhase.FinePlacement && ExperimentState.curBlockTechnique == Technique.PhoneGyro)
         {
             if (isPointerDown)
             {
                 MoveWithGyro();
             }
         }
-        else if (ExperimentState.trialPhase == TrialPhase.Rotation && ExperimentState.curBlockTechnique == Technique.PhoneGyro)
+        else if (ExperimentState.curTrialPhase == TrialPhase.Rotation && ExperimentState.curBlockTechnique == Technique.PhoneGyro)
         {
             if (isPointerDown)
             {

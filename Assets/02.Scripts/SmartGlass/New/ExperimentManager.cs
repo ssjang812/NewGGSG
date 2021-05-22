@@ -25,8 +25,6 @@ public class ExperimentManager : MonoBehaviour
     public float MinAngle;
     public float MaxAngle;
 
-
-
     //수치값 최소 최대값을 10등분 하기위해 사이값 저장
     private float NearOffsetGap;
     private float FarOffsetGap;
@@ -51,11 +49,13 @@ public class ExperimentManager : MonoBehaviour
         ExperimentState.curBlockNum = -1;
         ExperimentState.curBlockDistance = Distance.Null;
         ExperimentState.curBlockTechnique = Technique.Null;
-        ExperimentState.trialPhase = TrialPhase.Null;
+        ExperimentState.curTrialNum = -1;
+        ExperimentState.curTrialPhase = TrialPhase.Null;
         ExperimentState.curPositionOffset = -1;
         ExperimentState.curRotationOffset = -1;
 
         RPC_PhonetoGlasses.event_pointerUp.AddListener(PhaseCheck);
+        RPC_PhonetoGlasses.event_pointerDown.AddListener(ReportPointerDown);
         RPC_PhonetoGlasses.event_nextButtonDeactivated.AddListener(SetActiveGuideChair);
         instructionPanel.SetActive(false);
         defaultManipChairPosition = manipChair.transform.localPosition;
@@ -186,19 +186,15 @@ public class ExperimentManager : MonoBehaviour
         */
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void StartExperiment()
     {
-        // 테스트 할때는 주석처리하자
-        //turnOffDuringExperiment.SetActive(false);
         ExperimentState.participantNum = expCtrPanel.participantNumber;
         ExperimentState.curBlockNum = expCtrPanel.blockNumber;
+        turnOffDuringExperiment.SetActive(false);
         curExpFlow = expAllFlow[ExperimentState.participantNum - 1];
+
+        CSVManager.AppendToReport(CSVManager.GetReportLine("Experiment Start"));
+
         SetOneBlock();
     }
 
@@ -222,42 +218,49 @@ public class ExperimentManager : MonoBehaviour
         ExperimentState.curBlockDistance = curExpCase.distance;
         ExperimentState.curBlockTechnique = curExpCase.technique;
 
-        Debug.Log(ExperimentState.curBlockDistance);
+        CSVManager.AppendToReport(CSVManager.GetReportLine("Block Start"));
+
         SetOneTrial();
     }
 
     //한블럭 10회 수행
     public void SetOneTrial()
     {
+        ExperimentState.curTrialNum = 11 - rotationRandomValue.Count;
         PV.RPC("RPC_OneTrialStart", RpcTarget.All); // trial 시작시마다 가림막 설치, 랜덤한 위치에 버튼생성을 위해 시작할때 신호를 보내줌
         manipChair.transform.localPosition = defaultManipChairPosition;
         manipChair.transform.rotation = Quaternion.identity;
 
-        // 한 trial의 첫 모드는 항상 시선으로 배치로 시작
-        ExperimentState.trialPhase = TrialPhase.RoughPlacement;
-
         // Trial 10번하면 새로운 의자 생성을 멈춤, 설문시간을 가진후 다시 시작을 누르면 다음 Block을 실행 : 어느경우에느 사용되는 rotation random 갯수로, 거리는 near, far 경우가 갈림
-        if (rotationRandomValue.Count == 0)
+        if (ExperimentState.curTrialNum > 10)
         {
             ExperimentState.curBlockDistance = Distance.Null;
             ExperimentState.curBlockTechnique = Technique.Null;
-            ExperimentState.trialPhase = TrialPhase.Null;
-            ExperimentState.curPositionOffset = 0;
-            ExperimentState.curRotationOffset = 0;
+            ExperimentState.curTrialNum = -1;
+            ExperimentState.curTrialPhase = TrialPhase.Null;
+            ExperimentState.curPositionOffset = -1;
+            ExperimentState.curRotationOffset = -1;
 
-            // 실험 종료
             if (ExperimentState.curBlockNum == 6)
             {
+                // 실험 종료
+                CSVManager.AppendToReport(CSVManager.GetReportLine("Block End"));
+                CSVManager.AppendToReport(CSVManager.GetReportLine("Experiment End"));
                 instruction.SetText($"<size=35><b>All trials are over</b></size>\n\nPlease call coordinator and fill out the questionnaire.");
                 nextBlockBtn.SetActive(false);
             } else if(ExperimentState.curBlockNum < 6)
             {
+                // Block블록 종료
+                CSVManager.AppendToReport(CSVManager.GetReportLine("Block End"));
                 instruction.SetText($"<size=35><b>Block{ExperimentState.curBlockNum} is over</b></size>\n\nPlease call coordinator and fill out the questionnaire.");
                 ExperimentState.curBlockNum++;
             }
             instructionPanel.SetActive(true);
             return;
         }
+
+        // 한 trial의 첫 모드는 항상 시선으로 배치로 시작
+        ExperimentState.curTrialPhase = TrialPhase.RoughPlacement;
 
         // 랜덤 값 리스트에서 이번 Trial에 사용될 랜덤값 선정
         System.Random random = new System.Random();
@@ -287,29 +290,32 @@ public class ExperimentManager : MonoBehaviour
         // 테스트 할때는 주석처리하자
         guideChair.SetActive(false); // 스마트폰의 가림막을 1초 누르면 다시 킬거임
 
-        // 실행할때마다 가림막 나오는거 안되고있다.
-        // 각 블록마다 어떻게 배치해야하는지 설명하는 페이지를 만들까, 아니면 말로설명할까 음... 연습 세션을 넣을까
-        // 기록기능
-        // 추가로 중간부터 시작할수있는 기능 있어야할듯 : 원하는 블록번호 넣는 칸 + 중간부터 시작버튼만 있으면 쉽게 만들듯하다
+        CSVManager.AppendToReport(CSVManager.GetReportLine("Trial Start"));
     }
 
 
+    // pointer up 마다 호출
     // 한번의 trial에는 3가지의 페이즈가 있음, 사용자 입력때마다 상태체크 or 정답체크하는 파트, 특정상태 or 정답이면 상호작용모드만 바꿔주면 된다.
     public void PhaseCheck()
     {
-        if(ExperimentState.trialPhase == TrialPhase.RoughPlacement)
+        if(ExperimentState.curTrialPhase == TrialPhase.RoughPlacement)
         {
             // 그냥 시선배치니까 어느정도 근처에 배치되면 ok
-            if(Vector3.Distance(guideChair.transform.position, manipChair.transform.position) < 2f)
+            float distance = Vector3.Distance(guideChair.transform.position, manipChair.transform.position);
+            if(distance < 2f)
             {
-                ExperimentState.trialPhase = TrialPhase.FinePlacement;
+                CSVManager.AppendToReport(CSVManager.GetReportLine("correct", distance));
+                ExperimentState.curTrialPhase = TrialPhase.FinePlacement;
             }
         }
-        else if(ExperimentState.trialPhase == TrialPhase.FinePlacement)
+        else if(ExperimentState.curTrialPhase == TrialPhase.FinePlacement)
         {
             // 정답체크해서 맞으면 각도모드로 바꿔주고 아니면 말고
-            if (Vector3.Distance(guideChair.transform.position, manipChair.transform.position) < 0.15f)
+            float distance = Vector3.Distance(guideChair.transform.position, manipChair.transform.position);
+            // 정답일때
+            if (distance < 0.15f)
             {
+                CSVManager.AppendToReport(CSVManager.GetReportLine("correct", distance));
                 System.Random random = new System.Random();
                 guideChair.transform.rotation = Quaternion.identity;
                 if(random.Next(2) == 0)
@@ -320,19 +326,43 @@ public class ExperimentManager : MonoBehaviour
                 {
                     guideChair.transform.Rotate(new Vector3(0, -ExperimentState.curRotationOffset, 0));
                 }
-                ExperimentState.trialPhase = TrialPhase.Rotation;
+                ExperimentState.curTrialPhase = TrialPhase.Rotation;
+            }
+            else
+            {
+                //정답은 아닌데 화면에서 손 땟을때
+                CSVManager.AppendToReport(CSVManager.GetReportLine("release", distance));
             }
         }
         else
         {
+            float angleGap = Vector3.Angle(guideChair.transform.forward, manipChair.transform.forward);
             // 정답체크해서 맞으면 다음 trial 호출 (세번째 페이즈까지 완료하면 다음 trial 호출)
-            if (Vector3.Angle(guideChair.transform.forward, manipChair.transform.forward) < 8f)
+            if(angleGap < 8f)
             {
+                // 정답
+                CSVManager.AppendToReport(CSVManager.GetReportLine("correct", angleGap));
+                CSVManager.AppendToReport(CSVManager.GetReportLine("Trial End"));
                 SetOneTrial();
+            }
+            else
+            {
+                // 정답아닌데 손땟을때
+                CSVManager.AppendToReport(CSVManager.GetReportLine("release", angleGap));
             }
         }
     }
 
+    private void ReportPointerDown()
+    {
+        // 스마트폰에 가림막을 누르는 터치에대해서는 파일에 기록하지않기위해 if 문을 추가했음
+        if(guideChair.activeSelf)
+        {
+            CSVManager.AppendToReport(CSVManager.GetReportLine("press"));
+        }
+    }
+
+    // 스마트폰에서 가림막이 사라질때 꺼뒀던 문제를 공개하는 코드 (리스너에 등록하여 동작)
     private void SetActiveGuideChair()
     {
         guideChair.SetActive(true);

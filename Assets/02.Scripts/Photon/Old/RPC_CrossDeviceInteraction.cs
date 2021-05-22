@@ -35,6 +35,7 @@ public class RPC_CrossDeviceInteraction : MonoBehaviour
         return returnable;
     }
 
+    /*
     [PunRPC]
     void RPC_gazeTouch()
     {
@@ -50,4 +51,5 @@ public class RPC_CrossDeviceInteraction : MonoBehaviour
         CSVManager.AppendToReport(GetReportTouchGaze());
         event_touchGaze.Invoke();
     }
+    */
 }

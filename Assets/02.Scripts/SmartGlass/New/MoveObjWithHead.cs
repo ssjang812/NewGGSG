@@ -30,14 +30,14 @@ public class MoveObjWithHead : MonoBehaviour
     {
         HeadRotDelYXUpdate();
 
-        if (ExperimentState.trialPhase == TrialPhase.FinePlacement && ExperimentState.curBlockTechnique == Technique.GlassesHead)
+        if (ExperimentState.curTrialPhase == TrialPhase.FinePlacement && ExperimentState.curBlockTechnique == Technique.GlassesHead)
         {
             if (isPointerDown)
             {
                 MoveWithHead();
             }
         }
-        else if (ExperimentState.trialPhase == TrialPhase.Rotation && ExperimentState.curBlockTechnique == Technique.GlassesHead)
+        else if (ExperimentState.curTrialPhase == TrialPhase.Rotation && ExperimentState.curBlockTechnique == Technique.GlassesHead)
         {
             if (isPointerDown)
             {

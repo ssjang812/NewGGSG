@@ -17,11 +17,6 @@ public class GenerateObjWithGaze : MonoBehaviour
         RPC_PhonetoGlasses.event_chairButtonUp.AddListener(PlaceWithGaze);
     }
 
-    private void Update()
-    { 
-
-    }
-
     /*
     public void GenerateWithGaze()
     {
@@ -33,7 +28,7 @@ public class GenerateObjWithGaze : MonoBehaviour
 
     public void PlaceWithGaze()
     {
-        if (ExperimentState.trialPhase == TrialPhase.RoughPlacement)
+        if (ExperimentState.curTrialPhase == TrialPhase.RoughPlacement)
         {
             if (EyeTrackingProvider.GazeTarget != null)
             {

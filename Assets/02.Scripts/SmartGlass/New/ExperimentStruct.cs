@@ -37,7 +37,8 @@ struct ExperimentState
     public static int curBlockNum;
     public static Distance curBlockDistance;
     public static Technique curBlockTechnique;
-    public static TrialPhase trialPhase;
+    public static int curTrialNum;
+    public static TrialPhase curTrialPhase;
     public static float curPositionOffset;
     public static float curRotationOffset;
 }

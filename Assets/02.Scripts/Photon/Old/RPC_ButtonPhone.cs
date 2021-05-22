@@ -41,6 +41,7 @@ public class RPC_ButtonPhone : MonoBehaviour
         return returnable;
     }
 
+    /*
     [PunRPC]
     void RPC_onClickButtonPhone(string newOnClickButton)
     {
@@ -58,4 +59,5 @@ public class RPC_ButtonPhone : MonoBehaviour
         CSVManager.AppendToReport(ReportOnPointerUpButtonPhone());
         event_onPointerUpButtonPhone.Invoke();
     }
+    */
 }

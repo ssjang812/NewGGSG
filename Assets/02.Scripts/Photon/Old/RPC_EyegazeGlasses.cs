@@ -43,7 +43,7 @@ public class RPC_EyegazeGlasses : MonoBehaviour
             event_GazeNullGlasses = new UnityEvent();
         */
     }
-
+    /*
     [PunRPC]
     void RPC_GazeOnObj(string newGazeOnObject)
     {
@@ -61,4 +61,5 @@ public class RPC_EyegazeGlasses : MonoBehaviour
         CSVManager.AppendToReport(GetReportGazeNull());
         //event_GazeNullGlasses.Invoke();
     }
+    */
 }

@@ -27,6 +27,7 @@ public class RPC_GestureGlasses : MonoBehaviour
         return returnable;
     }
 
+    /*
     [PunRPC]
     void RPC_PinchGlasses(string newPinchObj)
     {
@@ -35,4 +36,5 @@ public class RPC_GestureGlasses : MonoBehaviour
         CSVManager.AppendToReport(GetReportPinchGlasses());      
         event_PinchGlasses.Invoke();
     }
+    */
 }

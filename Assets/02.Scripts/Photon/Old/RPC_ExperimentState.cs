@@ -125,7 +125,7 @@ public class RPC_ExperimentState : MonoBehaviour
     {
         targetPoint = newTargetPoint;
     }
-
+    /*
     [PunRPC]
     void RPC_Trigger_StartExperiment()
     {
@@ -184,4 +184,5 @@ public class RPC_ExperimentState : MonoBehaviour
         CSVManager.AppendToReport(EndReportLine());
         event_EndExperiment.Invoke();
     }
+    */
 }

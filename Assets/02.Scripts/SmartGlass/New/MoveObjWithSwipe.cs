@@ -16,13 +16,13 @@ public class MoveObjWithSwipe : MonoBehaviour
 
     private void Update()
     {
-        if (ExperimentState.trialPhase == TrialPhase.FinePlacement && ExperimentState.curBlockTechnique == Technique.PhoneSwipe)
+        if (ExperimentState.curTrialPhase == TrialPhase.FinePlacement && ExperimentState.curBlockTechnique == Technique.PhoneSwipe)
         {
             if (isPointerDown)
             {
                 MoveWithSwipe();
             }
-        } else if(ExperimentState.trialPhase == TrialPhase.Rotation && ExperimentState.curBlockTechnique == Technique.PhoneSwipe)
+        } else if(ExperimentState.curTrialPhase == TrialPhase.Rotation && ExperimentState.curBlockTechnique == Technique.PhoneSwipe)
         {
             if (isPointerDown)
             {
