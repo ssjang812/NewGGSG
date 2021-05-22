@@ -17,6 +17,9 @@ public class ExperimentManager : MonoBehaviour
     public TextMeshProUGUI instruction;
     public GameObject nextBlockBtn;
     public PhotonView PV;
+    public int practiceTimes = 3;
+    private int practiceCounter;
+    private bool isPractice;
     private Vector3 defaultManipChairPosition;
 
     //실험 수치값 유니티를통해 받기
@@ -198,7 +201,7 @@ public class ExperimentManager : MonoBehaviour
         SetOneBlock();
     }
 
-    public void SetOneBlock()
+    private void SetOneBlock()
     {
         //혹시모르니 세팅시작할때 한번 비워주고 새로
         nearRandomValue.Clear();
@@ -220,11 +223,52 @@ public class ExperimentManager : MonoBehaviour
 
         CSVManager.AppendToReport(CSVManager.GetReportLine("Block Start"));
 
-        SetOneTrial();
+        practiceCounter = 0;
+        isPractice = true;
+        SetOnePractice();
+    }
+
+    //연습모드
+    private void SetOnePractice()
+    {
+        // SetOneTrial과 다른점은 랜덤값을 사용해도 리스트에서 삭제하지 않는다는점, 블럭종료까지 진행되는게 아니라 3회 후 바로 SetOneTrial실행으로 바로 이어진다는점, 끝내는 조건관련 변수들에 손대지않는다는점
+        practiceCounter++;
+        PV.RPC("RPC_OneTrialStart", RpcTarget.All); // trial 시작시마다 가림막 설치, 랜덤한 위치에 버튼생성을 위해 시작할때 신호를 보내줌
+        manipChair.transform.localPosition = defaultManipChairPosition;
+        manipChair.transform.rotation = Quaternion.identity;
+
+        ExperimentState.curTrialPhase = TrialPhase.RoughPlacement;
+
+        // 랜덤 값 리스트에서 이번 Trial에 사용될 랜덤값 선정 실전과 다른점은 리스트에서 뽑아서 써도 삭제시키지 않는다는점
+        System.Random random = new System.Random();
+        int index;
+
+        if (ExperimentState.curBlockDistance == Distance.Near)
+        {
+            index = random.Next(nearRandomValue.Count);
+            ExperimentState.curPositionOffset = nearRandomValue[index];
+        }
+        else
+        {
+            index = random.Next(farRandomValue.Count);
+            ExperimentState.curPositionOffset = farRandomValue[index];
+        }
+        index = random.Next(rotationRandomValue.Count);
+        ExperimentState.curRotationOffset = rotationRandomValue[index];
+
+        // 배치와 돌리는 과정을 나눠서하기때문에 Que도 나눠서 두단계에 걸쳐서 줘야함, 여기서는 포지션 큐만, 로테이션은 상세배치 끝난후에
+        guideChair.transform.localPosition = Vector3.zero;
+        guideChair.transform.rotation = Quaternion.identity;
+        guideChair.transform.Translate(new Vector3(ExperimentState.curPositionOffset, 0, 0));
+
+        // 테스트 할때는 주석처리하자
+        guideChair.SetActive(false); // 스마트폰의 가림막을 1초 누르면 다시 킬거임
+
+        CSVManager.AppendToReport(CSVManager.GetReportLine("Practice Trial Start"));
     }
 
     //한블럭 10회 수행
-    public void SetOneTrial()
+    private void SetOneTrial()
     {
         ExperimentState.curTrialNum = 11 - rotationRandomValue.Count;
         PV.RPC("RPC_OneTrialStart", RpcTarget.All); // trial 시작시마다 가림막 설치, 랜덤한 위치에 버튼생성을 위해 시작할때 신호를 보내줌
@@ -342,8 +386,25 @@ public class ExperimentManager : MonoBehaviour
             {
                 // 정답
                 CSVManager.AppendToReport(CSVManager.GetReportLine("correct", angleGap));
-                CSVManager.AppendToReport(CSVManager.GetReportLine("Trial End"));
-                SetOneTrial();
+                if(practiceCounter < practiceTimes)
+                {
+                    CSVManager.AppendToReport(CSVManager.GetReportLine("Practice Trial End"));
+                    SetOnePractice();
+                }
+                else
+                {
+                    //연습 3회 한 후에는 정상모드로 돌입 (practiceCounter가 3일때 부터), isPractice는 Practice 끝남을 기록하는 동시에 SetOneTrial실행으로 바꿔줘야하기때문에 필요
+                    if(isPractice)
+                    {
+                        CSVManager.AppendToReport(CSVManager.GetReportLine("Practice Trial End"));
+                        isPractice = false;
+                    }
+                    else
+                    {
+                        CSVManager.AppendToReport(CSVManager.GetReportLine("Trial End"));
+                    }
+                    SetOneTrial();
+                }
             }
             else
             {

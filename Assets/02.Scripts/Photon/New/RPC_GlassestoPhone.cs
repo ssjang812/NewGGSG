@@ -17,6 +17,6 @@ public class RPC_GlassestoPhone : MonoBehaviour
     void RPC_OneTrialStart()
     {
         event_oneTrialStart.Invoke();
-        Debug.Log("RPC_OnOneTrialStart");
+        //Debug.Log("RPC_OnOneTrialStart");
     }
 }

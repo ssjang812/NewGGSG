@@ -1,117 +1,159 @@
 Participant,Block,Distance,Technique,Trial,Phase,Event,Gap,Time Stamp
-5,6,Null,Null,-1,Null,Experiment Start,,08:05:11.968
-5,6,Far,PhoneGyro,-1,Null,Block Start,,08:05:11.973
-5,6,Far,PhoneGyro,1,RoughPlacement,Trial Start,,08:05:11.979
-5,6,Far,PhoneGyro,1,RoughPlacement,press,,08:05:24.398
-5,6,Far,PhoneGyro,1,RoughPlacement,correct,0.0911533,08:05:25.397
-5,6,Far,PhoneGyro,1,FinePlacement,press,,08:05:25.995
-5,6,Far,PhoneGyro,1,FinePlacement,correct,0.07102149,08:05:26.655
-5,6,Far,PhoneGyro,1,Rotation,press,,08:05:27.135
-5,6,Far,PhoneGyro,1,Rotation,correct,5.978288,08:05:28.195
-5,6,Far,PhoneGyro,1,Rotation,Trial End,,08:05:28.196
-5,6,Far,PhoneGyro,2,RoughPlacement,Trial Start,,08:05:28.197
-5,6,Far,PhoneGyro,2,RoughPlacement,press,,08:05:31.153
-5,6,Far,PhoneGyro,2,RoughPlacement,correct,0.4794302,08:05:31.634
-5,6,Far,PhoneGyro,2,FinePlacement,press,,08:05:32.377
-5,6,Far,PhoneGyro,2,FinePlacement,correct,0.07392529,08:05:33.415
-5,6,Far,PhoneGyro,2,Rotation,press,,08:05:33.871
-5,6,Far,PhoneGyro,2,Rotation,correct,4.285418,08:05:35.075
-5,6,Far,PhoneGyro,2,Rotation,Trial End,,08:05:35.075
-5,6,Far,PhoneGyro,3,RoughPlacement,Trial Start,,08:05:35.076
-5,6,Far,PhoneGyro,3,RoughPlacement,press,,08:05:37.193
-5,6,Far,PhoneGyro,3,RoughPlacement,correct,0.7968542,08:05:37.455
-5,6,Far,PhoneGyro,3,FinePlacement,press,,08:05:37.753
-5,6,Far,PhoneGyro,3,FinePlacement,correct,0.08808842,08:05:39.274
-5,6,Far,PhoneGyro,3,Rotation,press,,08:05:39.716
-5,6,Far,PhoneGyro,3,Rotation,release,10.34891,08:05:40.633
-5,6,Far,PhoneGyro,3,Rotation,press,,08:05:41.094
-5,6,Far,PhoneGyro,3,Rotation,correct,7.261797,08:05:41.297
-5,6,Far,PhoneGyro,3,Rotation,Trial End,,08:05:41.297
-5,6,Far,PhoneGyro,4,RoughPlacement,Trial Start,,08:05:41.298
-5,6,Far,PhoneGyro,4,RoughPlacement,press,,08:05:43.456
-5,6,Far,PhoneGyro,4,RoughPlacement,correct,0.5870405,08:05:43.817
-5,6,Far,PhoneGyro,4,FinePlacement,press,,08:05:44.195
-5,6,Far,PhoneGyro,4,FinePlacement,correct,0.09886064,08:05:45.633
-5,6,Far,PhoneGyro,4,Rotation,press,,08:05:46.096
-5,6,Far,PhoneGyro,4,Rotation,release,9.006321,08:05:46.933
-5,6,Far,PhoneGyro,4,Rotation,press,,08:05:47.393
-5,6,Far,PhoneGyro,4,Rotation,release,10.40091,08:05:47.656
-5,6,Far,PhoneGyro,4,Rotation,press,,08:05:48.113
-5,6,Far,PhoneGyro,4,Rotation,release,21.06925,08:05:48.336
-5,6,Far,PhoneGyro,4,Rotation,press,,08:05:48.638
-5,6,Far,PhoneGyro,4,Rotation,correct,1.187291,08:05:49.178
-5,6,Far,PhoneGyro,4,Rotation,Trial End,,08:05:49.178
-5,6,Far,PhoneGyro,5,RoughPlacement,Trial Start,,08:05:49.179
-5,6,Far,PhoneGyro,5,RoughPlacement,press,,08:05:51.456
-5,6,Far,PhoneGyro,5,RoughPlacement,correct,0.3786718,08:05:51.957
-5,6,Far,PhoneGyro,5,FinePlacement,press,,08:05:52.356
-5,6,Far,PhoneGyro,5,FinePlacement,release,0.218373,08:05:52.596
-5,6,Far,PhoneGyro,5,FinePlacement,press,,08:05:52.817
-5,6,Far,PhoneGyro,5,FinePlacement,release,0.3674274,08:05:53.034
-5,6,Far,PhoneGyro,5,FinePlacement,press,,08:05:53.294
-5,6,Far,PhoneGyro,5,FinePlacement,release,0.2915748,08:05:54.196
-5,6,Far,PhoneGyro,5,FinePlacement,press,,08:05:54.413
-5,6,Far,PhoneGyro,5,FinePlacement,release,0.1561912,08:05:55.137
-5,6,Far,PhoneGyro,5,FinePlacement,press,,08:05:55.312
-5,6,Far,PhoneGyro,5,FinePlacement,correct,0.06205344,08:05:56.078
-5,6,Far,PhoneGyro,5,Rotation,press,,08:05:56.433
-5,6,Far,PhoneGyro,5,Rotation,release,178.6866,08:05:56.836
-5,6,Far,PhoneGyro,5,Rotation,press,,08:05:57.054
-5,6,Far,PhoneGyro,5,Rotation,release,64.35973,08:05:57.457
-5,6,Far,PhoneGyro,5,Rotation,press,,08:05:57.657
-5,6,Far,PhoneGyro,5,Rotation,correct,1.177029,08:05:58.612
-5,6,Far,PhoneGyro,5,Rotation,Trial End,,08:05:58.613
-5,6,Far,PhoneGyro,6,RoughPlacement,Trial Start,,08:05:58.614
-5,6,Far,PhoneGyro,6,RoughPlacement,press,,08:06:00.577
-5,6,Far,PhoneGyro,6,RoughPlacement,correct,0.1769289,08:06:01.532
-5,6,Far,PhoneGyro,6,FinePlacement,press,,08:06:02.193
-5,6,Far,PhoneGyro,6,FinePlacement,correct,0.07429601,08:06:03.155
-5,6,Far,PhoneGyro,6,Rotation,press,,08:06:03.556
-5,6,Far,PhoneGyro,6,Rotation,correct,6.691287,08:06:04.896
-5,6,Far,PhoneGyro,6,Rotation,Trial End,,08:06:04.896
-5,6,Far,PhoneGyro,7,RoughPlacement,Trial Start,,08:06:04.897
-5,6,Far,PhoneGyro,7,RoughPlacement,press,,08:06:07.052
-5,6,Far,PhoneGyro,7,RoughPlacement,correct,1.00721,08:06:07.175
-5,6,Far,PhoneGyro,7,FinePlacement,press,,08:06:07.433
-5,6,Far,PhoneGyro,7,FinePlacement,release,0.4931276,08:06:08.131
-5,6,Far,PhoneGyro,7,FinePlacement,press,,08:06:08.373
-5,6,Far,PhoneGyro,7,FinePlacement,release,0.2600584,08:06:08.955
-5,6,Far,PhoneGyro,7,FinePlacement,press,,08:06:09.354
-5,6,Far,PhoneGyro,7,FinePlacement,correct,0.07073811,08:06:10.295
-5,6,Far,PhoneGyro,7,Rotation,press,,08:06:10.536
-5,6,Far,PhoneGyro,7,Rotation,correct,2.940847,08:06:11.895
-5,6,Far,PhoneGyro,7,Rotation,Trial End,,08:06:11.895
-5,6,Far,PhoneGyro,8,RoughPlacement,Trial Start,,08:06:11.896
-5,6,Far,PhoneGyro,8,RoughPlacement,press,,08:06:14.156
-5,6,Far,PhoneGyro,8,RoughPlacement,correct,1.217828,08:06:14.277
-5,6,Far,PhoneGyro,8,FinePlacement,press,,08:06:14.892
-5,6,Far,PhoneGyro,8,FinePlacement,release,0.4908935,08:06:15.159
-5,6,Far,PhoneGyro,8,FinePlacement,press,,08:06:15.715
-5,6,Far,PhoneGyro,8,FinePlacement,correct,0.07082082,08:06:16.892
-5,6,Far,PhoneGyro,8,Rotation,press,,08:06:17.256
-5,6,Far,PhoneGyro,8,Rotation,correct,6.317362,08:06:19.154
-5,6,Far,PhoneGyro,8,Rotation,Trial End,,08:06:19.154
-5,6,Far,PhoneGyro,9,RoughPlacement,Trial Start,,08:06:19.156
-5,6,Far,PhoneGyro,9,RoughPlacement,press,,08:06:21.254
-5,6,Far,PhoneGyro,9,RoughPlacement,correct,0.2730098,08:06:21.437
-5,6,Far,PhoneGyro,9,FinePlacement,press,,08:06:21.752
-5,6,Far,PhoneGyro,9,FinePlacement,correct,0.05990908,08:06:22.675
-5,6,Far,PhoneGyro,9,Rotation,press,,08:06:23.054
-5,6,Far,PhoneGyro,9,Rotation,release,14.34271,08:06:24.417
-5,6,Far,PhoneGyro,9,Rotation,press,,08:06:24.816
-5,6,Far,PhoneGyro,9,Rotation,correct,3.817929,08:06:24.973
-5,6,Far,PhoneGyro,9,Rotation,Trial End,,08:06:24.973
-5,6,Far,PhoneGyro,10,RoughPlacement,Trial Start,,08:06:24.974
-5,6,Far,PhoneGyro,10,RoughPlacement,press,,08:06:27.117
-5,6,Far,PhoneGyro,10,RoughPlacement,correct,1.428591,08:06:27.552
-5,6,Far,PhoneGyro,10,FinePlacement,press,,08:06:27.857
-5,6,Far,PhoneGyro,10,FinePlacement,release,0.9303354,08:06:28.316
-5,6,Far,PhoneGyro,10,FinePlacement,press,,08:06:28.672
-5,6,Far,PhoneGyro,10,FinePlacement,release,0.3873672,08:06:29.053
-5,6,Far,PhoneGyro,10,FinePlacement,press,,08:06:29.415
-5,6,Far,PhoneGyro,10,FinePlacement,correct,0.06385525,08:06:30.296
-5,6,Far,PhoneGyro,10,Rotation,press,,08:06:31.515
-5,6,Far,PhoneGyro,10,Rotation,correct,2.463548,08:06:32.734
-5,6,Far,PhoneGyro,10,Rotation,Trial End,,08:06:32.735
-5,6,Null,Null,-1,Null,Block End,,08:06:32.736
-5,6,Null,Null,-1,Null,Experiment End,,08:06:32.736
+5,6,Null,Null,-1,Null,Experiment Start,,09:22:22.656
+5,6,Far,PhoneGyro,-1,Null,Block Start,,09:22:22.661
+5,6,Far,PhoneGyro,-1,RoughPlacement,Practice Trial Start,,09:22:22.666
+5,6,Far,PhoneGyro,-1,RoughPlacement,press,,09:22:34.780
+5,6,Far,PhoneGyro,-1,RoughPlacement,correct,0.3118062,09:22:36.143
+5,6,Far,PhoneGyro,-1,FinePlacement,press,,09:22:37.617
+5,6,Far,PhoneGyro,-1,FinePlacement,release,0.9915091,09:22:39.859
+5,6,Far,PhoneGyro,-1,FinePlacement,press,,09:22:40.161
+5,6,Far,PhoneGyro,-1,FinePlacement,release,0.4680093,09:22:40.417
+5,6,Far,PhoneGyro,-1,FinePlacement,press,,09:22:40.758
+5,6,Far,PhoneGyro,-1,FinePlacement,release,0.6766542,09:22:41.418
+5,6,Far,PhoneGyro,-1,FinePlacement,press,,09:22:41.738
+5,6,Far,PhoneGyro,-1,FinePlacement,release,0.8004135,09:22:42.057
+5,6,Far,PhoneGyro,-1,FinePlacement,press,,09:22:42.322
+5,6,Far,PhoneGyro,-1,FinePlacement,release,0.3662827,09:22:43.122
+5,6,Far,PhoneGyro,-1,FinePlacement,press,,09:22:43.302
+5,6,Far,PhoneGyro,-1,FinePlacement,correct,0.05827064,09:22:44.560
+5,6,Far,PhoneGyro,-1,Rotation,press,,09:22:45.059
+5,6,Far,PhoneGyro,-1,Rotation,release,55.34855,09:22:45.839
+5,6,Far,PhoneGyro,-1,Rotation,press,,09:22:46.120
+5,6,Far,PhoneGyro,-1,Rotation,release,92.41038,09:22:46.620
+5,6,Far,PhoneGyro,-1,Rotation,press,,09:22:46.899
+5,6,Far,PhoneGyro,-1,Rotation,correct,4.384365,09:22:47.802
+5,6,Far,PhoneGyro,-1,Rotation,Practice Trial End,,09:22:47.803
+5,6,Far,PhoneGyro,-1,RoughPlacement,Practice Trial Start,,09:22:47.803
+5,6,Far,PhoneGyro,-1,RoughPlacement,press,,09:22:50.918
+5,6,Far,PhoneGyro,-1,RoughPlacement,correct,0.5853002,09:22:51.880
+5,6,Far,PhoneGyro,-1,FinePlacement,press,,09:22:52.561
+5,6,Far,PhoneGyro,-1,FinePlacement,release,0.2524817,09:22:52.881
+5,6,Far,PhoneGyro,-1,FinePlacement,press,,09:22:53.178
+5,6,Far,PhoneGyro,-1,FinePlacement,release,0.5333593,09:22:53.397
+5,6,Far,PhoneGyro,-1,FinePlacement,press,,09:22:53.558
+5,6,Far,PhoneGyro,-1,FinePlacement,release,0.2943869,09:22:53.859
+5,6,Far,PhoneGyro,-1,FinePlacement,press,,09:22:54.020
+5,6,Far,PhoneGyro,-1,FinePlacement,release,0.4145502,09:22:54.300
+5,6,Far,PhoneGyro,-1,FinePlacement,press,,09:22:54.542
+5,6,Far,PhoneGyro,-1,FinePlacement,release,0.306534,09:22:54.860
+5,6,Far,PhoneGyro,-1,FinePlacement,press,,09:22:55.078
+5,6,Far,PhoneGyro,-1,FinePlacement,release,0.1703166,09:22:55.577
+5,6,Far,PhoneGyro,-1,FinePlacement,press,,09:22:56.018
+5,6,Far,PhoneGyro,-1,FinePlacement,release,0.4421764,09:22:56.402
+5,6,Far,PhoneGyro,-1,FinePlacement,press,,09:22:56.678
+5,6,Far,PhoneGyro,-1,FinePlacement,release,0.1531782,09:22:57.737
+5,6,Far,PhoneGyro,-1,FinePlacement,press,,09:22:58.299
+5,6,Far,PhoneGyro,-1,FinePlacement,correct,0.08561374,09:22:58.619
+5,6,Far,PhoneGyro,-1,Rotation,press,,09:22:59.040
+5,6,Far,PhoneGyro,-1,Rotation,correct,0.7758168,09:23:00.241
+5,6,Far,PhoneGyro,-1,Rotation,Practice Trial End,,09:23:00.241
+5,6,Far,PhoneGyro,-1,RoughPlacement,Practice Trial Start,,09:23:00.242
+5,6,Far,PhoneGyro,-1,RoughPlacement,press,,09:23:02.878
+5,6,Far,PhoneGyro,-1,RoughPlacement,press,,09:23:03.598
+5,6,Far,PhoneGyro,-1,RoughPlacement,correct,0.5636333,09:23:04.044
+5,6,Far,PhoneGyro,-1,FinePlacement,press,,09:23:04.740
+5,6,Far,PhoneGyro,-1,FinePlacement,release,0.3908491,09:23:05.119
+5,6,Far,PhoneGyro,-1,FinePlacement,press,,09:23:05.325
+5,6,Far,PhoneGyro,-1,FinePlacement,release,0.6602231,09:23:05.563
+5,6,Far,PhoneGyro,-1,FinePlacement,press,,09:23:05.700
+5,6,Far,PhoneGyro,-1,FinePlacement,release,0.4269605,09:23:06.044
+5,6,Far,PhoneGyro,-1,FinePlacement,press,,09:23:06.229
+5,6,Far,PhoneGyro,-1,FinePlacement,release,0.2995664,09:23:06.540
+5,6,Far,PhoneGyro,-1,FinePlacement,press,,09:23:06.738
+5,6,Far,PhoneGyro,-1,FinePlacement,release,0.1653449,09:23:07.121
+5,6,Far,PhoneGyro,-1,FinePlacement,press,,09:23:07.297
+5,6,Far,PhoneGyro,-1,FinePlacement,correct,0.07450308,09:23:08.042
+5,6,Far,PhoneGyro,-1,Rotation,press,,09:23:08.383
+5,6,Far,PhoneGyro,-1,Rotation,correct,3.546244,09:23:10.018
+5,6,Far,PhoneGyro,-1,Rotation,Trial End,,09:23:10.018
+5,6,Far,PhoneGyro,1,RoughPlacement,Trial Start,,09:23:10.019
+5,6,Far,PhoneGyro,1,RoughPlacement,press,,09:23:13.621
+5,6,Far,PhoneGyro,1,RoughPlacement,correct,0.1985372,09:23:14.158
+5,6,Far,PhoneGyro,1,FinePlacement,press,,09:23:14.759
+5,6,Far,PhoneGyro,1,FinePlacement,correct,0.08337039,09:23:16.003
+5,6,Far,PhoneGyro,1,Rotation,press,,09:23:16.598
+5,6,Far,PhoneGyro,1,Rotation,release,8.644111,09:23:17.559
+5,6,Far,PhoneGyro,1,Rotation,press,,09:23:18.261
+5,6,Far,PhoneGyro,1,Rotation,release,17.29231,09:23:18.877
+5,6,Far,PhoneGyro,1,Rotation,press,,09:23:19.382
+5,6,Far,PhoneGyro,1,Rotation,correct,1.881592,09:23:20.022
+5,6,Far,PhoneGyro,1,Rotation,Trial End,,09:23:20.022
+5,6,Far,PhoneGyro,2,RoughPlacement,Trial Start,,09:23:20.023
+5,6,Far,PhoneGyro,2,RoughPlacement,press,,09:23:22.579
+5,6,Far,PhoneGyro,2,RoughPlacement,correct,0.9333767,09:23:22.859
+5,6,Far,PhoneGyro,2,FinePlacement,press,,09:23:23.282
+5,6,Far,PhoneGyro,2,FinePlacement,correct,0.06393558,09:23:24.700
+5,6,Far,PhoneGyro,2,Rotation,press,,09:23:25.020
+5,6,Far,PhoneGyro,2,Rotation,correct,1.113466,09:23:26.782
+5,6,Far,PhoneGyro,2,Rotation,Trial End,,09:23:26.782
+5,6,Far,PhoneGyro,3,RoughPlacement,Trial Start,,09:23:26.783
+5,6,Far,PhoneGyro,3,RoughPlacement,press,,09:23:29.022
+5,6,Far,PhoneGyro,3,RoughPlacement,press,,09:23:30.219
+5,6,Far,PhoneGyro,3,RoughPlacement,correct,0.5312675,09:23:30.602
+5,6,Far,PhoneGyro,3,FinePlacement,press,,09:23:31.041
+5,6,Far,PhoneGyro,3,FinePlacement,correct,0.07835326,09:23:32.337
+5,6,Far,PhoneGyro,3,Rotation,press,,09:23:32.760
+5,6,Far,PhoneGyro,3,Rotation,correct,1.761142,09:23:33.978
+5,6,Far,PhoneGyro,3,Rotation,Trial End,,09:23:33.978
+5,6,Far,PhoneGyro,4,RoughPlacement,Trial Start,,09:23:33.978
+5,6,Far,PhoneGyro,4,RoughPlacement,press,,09:23:36.160
+5,6,Far,PhoneGyro,4,RoughPlacement,correct,0.3784108,09:23:36.601
+5,6,Far,PhoneGyro,4,FinePlacement,press,,09:23:37.139
+5,6,Far,PhoneGyro,4,FinePlacement,correct,0.0808621,09:23:38.561
+5,6,Far,PhoneGyro,4,Rotation,press,,09:23:39.057
+5,6,Far,PhoneGyro,4,Rotation,release,13.56873,09:23:40.940
+5,6,Far,PhoneGyro,4,Rotation,press,,09:23:41.418
+5,6,Far,PhoneGyro,4,Rotation,correct,5.11236,09:23:41.942
+5,6,Far,PhoneGyro,4,Rotation,Trial End,,09:23:41.942
+5,6,Far,PhoneGyro,5,RoughPlacement,Trial Start,,09:23:41.943
+5,6,Far,PhoneGyro,5,RoughPlacement,press,,09:23:44.040
+5,6,Far,PhoneGyro,5,RoughPlacement,correct,0.06313328,09:23:44.357
+5,6,Far,PhoneGyro,5,FinePlacement,press,,09:23:44.938
+5,6,Far,PhoneGyro,5,FinePlacement,correct,0.06591467,09:23:45.660
+5,6,Far,PhoneGyro,5,Rotation,press,,09:23:46.157
+5,6,Far,PhoneGyro,5,Rotation,correct,2.549984,09:23:47.917
+5,6,Far,PhoneGyro,5,Rotation,Trial End,,09:23:47.917
+5,6,Far,PhoneGyro,6,RoughPlacement,Trial Start,,09:23:47.918
+5,6,Far,PhoneGyro,6,RoughPlacement,press,,09:23:50.219
+5,6,Far,PhoneGyro,6,RoughPlacement,correct,0.4135934,09:23:50.622
+5,6,Far,PhoneGyro,6,FinePlacement,press,,09:23:51.220
+5,6,Far,PhoneGyro,6,FinePlacement,correct,0.07275975,09:23:52.221
+5,6,Far,PhoneGyro,6,Rotation,press,,09:23:52.877
+5,6,Far,PhoneGyro,6,Rotation,correct,1.097714,09:23:53.919
+5,6,Far,PhoneGyro,6,Rotation,Trial End,,09:23:53.919
+5,6,Far,PhoneGyro,7,RoughPlacement,Trial Start,,09:23:53.920
+5,6,Far,PhoneGyro,7,RoughPlacement,press,,09:23:56.160
+5,6,Far,PhoneGyro,7,RoughPlacement,correct,0.6531534,09:23:57.539
+5,6,Far,PhoneGyro,7,FinePlacement,press,,09:23:57.982
+5,6,Far,PhoneGyro,7,FinePlacement,correct,0.08677771,09:23:59.179
+5,6,Far,PhoneGyro,7,Rotation,press,,09:23:59.882
+5,6,Far,PhoneGyro,7,Rotation,correct,3.676422,09:24:01.679
+5,6,Far,PhoneGyro,7,Rotation,Trial End,,09:24:01.680
+5,6,Far,PhoneGyro,8,RoughPlacement,Trial Start,,09:24:01.680
+5,6,Far,PhoneGyro,8,RoughPlacement,press,,09:24:03.880
+5,6,Far,PhoneGyro,8,RoughPlacement,correct,1.285013,09:24:04.740
+5,6,Far,PhoneGyro,8,FinePlacement,press,,09:24:05.017
+5,6,Far,PhoneGyro,8,FinePlacement,release,0.6347706,09:24:06.011
+5,6,Far,PhoneGyro,8,FinePlacement,press,,09:24:06.537
+5,6,Far,PhoneGyro,8,FinePlacement,correct,0.1211785,09:24:08.122
+5,6,Far,PhoneGyro,8,Rotation,press,,09:24:08.541
+5,6,Far,PhoneGyro,8,Rotation,correct,1.882632,09:24:09.717
+5,6,Far,PhoneGyro,8,Rotation,Trial End,,09:24:09.717
+5,6,Far,PhoneGyro,9,RoughPlacement,Trial Start,,09:24:09.717
+5,6,Far,PhoneGyro,9,RoughPlacement,press,,09:24:12.361
+5,6,Far,PhoneGyro,9,RoughPlacement,correct,0.3180349,09:24:13.178
+5,6,Far,PhoneGyro,9,FinePlacement,press,,09:24:14.161
+5,6,Far,PhoneGyro,9,FinePlacement,correct,0.08068502,09:24:15.140
+5,6,Far,PhoneGyro,9,Rotation,press,,09:24:15.599
+5,6,Far,PhoneGyro,9,Rotation,correct,6.998716,09:24:16.822
+5,6,Far,PhoneGyro,9,Rotation,Trial End,,09:24:16.822
+5,6,Far,PhoneGyro,10,RoughPlacement,Trial Start,,09:24:16.823
+5,6,Far,PhoneGyro,10,RoughPlacement,press,,09:24:19.837
+5,6,Far,PhoneGyro,10,RoughPlacement,correct,0.08203725,09:24:20.783
+5,6,Far,PhoneGyro,10,FinePlacement,press,,09:24:21.461
+5,6,Far,PhoneGyro,10,FinePlacement,correct,0.05927622,09:24:22.217
+5,6,Far,PhoneGyro,10,Rotation,press,,09:24:22.579
+5,6,Far,PhoneGyro,10,Rotation,correct,0.6864257,09:24:23.698
+5,6,Far,PhoneGyro,10,Rotation,Trial End,,09:24:23.698
+5,6,Null,Null,-1,Null,Block End,,09:24:23.698
+5,6,Null,Null,-1,Null,Experiment End,,09:24:23.699
