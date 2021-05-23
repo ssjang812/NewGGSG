@@ -118,15 +118,16 @@ public class CSVManager : MonoBehaviour
 
     #region Queries
 
-    static string GetDirectoryPath()
-    {
-        return Application.dataPath + "/" + reportDirectoryName;
-    }
-
     static string GetFilePath()
     {
         reportFileName = ExperimentState.participantNum.ToString() + ".csv";
         return GetDirectoryPath() + "/" + reportFileName;
+    }
+
+    static string GetDirectoryPath()
+    {
+        //return Application.dataPath + "/" + reportDirectoryName;
+        return Application.persistentDataPath + "/" + reportDirectoryName;
     }
 
     static string GetTimeStamp()

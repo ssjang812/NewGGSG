@@ -235,7 +235,7 @@ public class ExperimentManager : MonoBehaviour
         practiceCounter++;
         PV.RPC("RPC_OneTrialStart", RpcTarget.All); // trial 시작시마다 가림막 설치, 랜덤한 위치에 버튼생성을 위해 시작할때 신호를 보내줌
         manipChair.transform.localPosition = defaultManipChairPosition;
-        manipChair.transform.rotation = Quaternion.identity;
+        manipChair.transform.localRotation = Quaternion.identity;
 
         ExperimentState.curTrialPhase = TrialPhase.RoughPlacement;
 
@@ -258,7 +258,7 @@ public class ExperimentManager : MonoBehaviour
 
         // 배치와 돌리는 과정을 나눠서하기때문에 Que도 나눠서 두단계에 걸쳐서 줘야함, 여기서는 포지션 큐만, 로테이션은 상세배치 끝난후에
         guideChair.transform.localPosition = Vector3.zero;
-        guideChair.transform.rotation = Quaternion.identity;
+        guideChair.transform.localRotation = Quaternion.identity;
         guideChair.transform.Translate(new Vector3(ExperimentState.curPositionOffset, 0, 0));
 
         // 테스트 할때는 주석처리하자
@@ -273,7 +273,7 @@ public class ExperimentManager : MonoBehaviour
         ExperimentState.curTrialNum = 11 - rotationRandomValue.Count;
         PV.RPC("RPC_OneTrialStart", RpcTarget.All); // trial 시작시마다 가림막 설치, 랜덤한 위치에 버튼생성을 위해 시작할때 신호를 보내줌
         manipChair.transform.localPosition = defaultManipChairPosition;
-        manipChair.transform.rotation = Quaternion.identity;
+        manipChair.transform.localRotation = Quaternion.identity;
 
         // Trial 10번하면 새로운 의자 생성을 멈춤, 설문시간을 가진후 다시 시작을 누르면 다음 Block을 실행 : 어느경우에느 사용되는 rotation random 갯수로, 거리는 near, far 경우가 갈림
         if (ExperimentState.curTrialNum > 10)
@@ -288,6 +288,12 @@ public class ExperimentManager : MonoBehaviour
             if (ExperimentState.curBlockNum == 6)
             {
                 // 실험 종료
+                ExperimentState.curBlockDistance = Distance.Null;
+                ExperimentState.curBlockTechnique = Technique.Null;
+                ExperimentState.curTrialNum = -1;
+                ExperimentState.curTrialPhase = TrialPhase.Null;
+                ExperimentState.curPositionOffset = -1;
+                ExperimentState.curRotationOffset = -1;
                 CSVManager.AppendToReport(CSVManager.GetReportLine("Block End"));
                 CSVManager.AppendToReport(CSVManager.GetReportLine("Experiment End"));
                 instruction.SetText($"<size=35><b>All trials are over</b></size>\n\nPlease call coordinator and fill out the questionnaire.");
@@ -295,6 +301,12 @@ public class ExperimentManager : MonoBehaviour
             } else if(ExperimentState.curBlockNum < 6)
             {
                 // Block블록 종료
+                ExperimentState.curBlockDistance = Distance.Null;
+                ExperimentState.curBlockTechnique = Technique.Null;
+                ExperimentState.curTrialNum = -1;
+                ExperimentState.curTrialPhase = TrialPhase.Null;
+                ExperimentState.curPositionOffset = -1;
+                ExperimentState.curRotationOffset = -1;
                 CSVManager.AppendToReport(CSVManager.GetReportLine("Block End"));
                 instruction.SetText($"<size=35><b>Block{ExperimentState.curBlockNum} is over</b></size>\n\nPlease call coordinator and fill out the questionnaire.");
                 ExperimentState.curBlockNum++;
@@ -328,7 +340,7 @@ public class ExperimentManager : MonoBehaviour
 
         // 배치와 돌리는 과정을 나눠서하기때문에 Que도 나눠서 두단계에 걸쳐서 줘야함, 여기서는 포지션 큐만, 로테이션은 상세배치 끝난후에
         guideChair.transform.localPosition = Vector3.zero;
-        guideChair.transform.rotation = Quaternion.identity;
+        guideChair.transform.localRotation = Quaternion.identity;
         guideChair.transform.Translate(new Vector3(ExperimentState.curPositionOffset, 0, 0));
 
         // 테스트 할때는 주석처리하자
@@ -361,7 +373,7 @@ public class ExperimentManager : MonoBehaviour
             {
                 CSVManager.AppendToReport(CSVManager.GetReportLine("correct", distance));
                 System.Random random = new System.Random();
-                guideChair.transform.rotation = Quaternion.identity;
+                guideChair.transform.localRotation = Quaternion.identity;
                 if(random.Next(2) == 0)
                 {
                     guideChair.transform.Rotate(new Vector3(0, ExperimentState.curRotationOffset, 0));
@@ -378,7 +390,7 @@ public class ExperimentManager : MonoBehaviour
                 CSVManager.AppendToReport(CSVManager.GetReportLine("release", distance));
             }
         }
-        else
+        else if(ExperimentState.curTrialPhase == TrialPhase.Rotation)
         {
             float angleGap = Vector3.Angle(guideChair.transform.forward, manipChair.transform.forward);
             // 정답체크해서 맞으면 다음 trial 호출 (세번째 페이즈까지 완료하면 다음 trial 호출)
@@ -417,7 +429,7 @@ public class ExperimentManager : MonoBehaviour
     private void ReportPointerDown()
     {
         // 스마트폰에 가림막을 누르는 터치에대해서는 파일에 기록하지않기위해 if 문을 추가했음
-        if(guideChair.activeSelf)
+        if(ExperimentState.curTrialPhase != TrialPhase.Null && guideChair.activeSelf)
         {
             CSVManager.AppendToReport(CSVManager.GetReportLine("press"));
         }

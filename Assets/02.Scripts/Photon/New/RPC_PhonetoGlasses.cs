@@ -71,7 +71,7 @@ public class RPC_PhonetoGlasses : MonoBehaviour
     void RPC_PointerDown()
     {
         event_pointerDown.Invoke();
-        //Debug.Log("RPC_PointerDown!");
+        Debug.Log("RPC_PointerDown!");
     }
 
     [PunRPC]

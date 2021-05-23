@@ -15917,7 +15917,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 738437144}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.081, z: 0.229}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0.197}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 871910381}
@@ -20754,7 +20754,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 958359914}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.99799997}
+  m_LocalPosition: {x: 0, y: 0, z: -0.03}
   m_LocalScale: {x: 0.0009999999, y: 0.0009999999, z: 0.0009999999}
   m_Children:
   - {fileID: 1887436865}
@@ -20765,7 +20765,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.025000004, y: 0.67599994}
+  m_AnchoredPosition: {x: -0.593, y: 0.684}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &958359916
@@ -26332,7 +26332,7 @@ MonoBehaviour:
   instruction: {fileID: 151300621}
   nextBlockBtn: {fileID: 1566133011}
   PV: {fileID: 250801992}
-  csvManager: {fileID: 67541338}
+  practiceTimes: 3
   NearLength: 0.9
   FarLength: 1.9
   MinAngle: 90
@@ -38883,7 +38883,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1851400226}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.889, z: 2.47}
+  m_LocalPosition: {x: 0, y: 0.889, z: 2.306}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 441380375}
