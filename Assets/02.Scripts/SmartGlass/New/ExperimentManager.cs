@@ -112,36 +112,36 @@ public class ExperimentManager : MonoBehaviour
         expAllFlow[1].Add(expDefaultFlow[1]);
         expAllFlow[1].Add(expDefaultFlow[4]);
         expAllFlow[1].Add(expDefaultFlow[5]);
-        expAllFlow[1].Add(expDefaultFlow[3]);
         expAllFlow[1].Add(expDefaultFlow[2]);
+        expAllFlow[1].Add(expDefaultFlow[3]);
 
         expAllFlow[2].Add(expDefaultFlow[2]);
         expAllFlow[2].Add(expDefaultFlow[3]);
-        expAllFlow[2].Add(expDefaultFlow[1]);
         expAllFlow[2].Add(expDefaultFlow[0]);
+        expAllFlow[2].Add(expDefaultFlow[1]);
         expAllFlow[2].Add(expDefaultFlow[4]);
         expAllFlow[2].Add(expDefaultFlow[5]);
 
         expAllFlow[3].Add(expDefaultFlow[2]);
         expAllFlow[3].Add(expDefaultFlow[3]);
-        expAllFlow[3].Add(expDefaultFlow[5]);
         expAllFlow[3].Add(expDefaultFlow[4]);
-        expAllFlow[3].Add(expDefaultFlow[1]);
+        expAllFlow[3].Add(expDefaultFlow[5]);
         expAllFlow[3].Add(expDefaultFlow[0]);
+        expAllFlow[3].Add(expDefaultFlow[1]);
 
-        expAllFlow[4].Add(expDefaultFlow[5]);
         expAllFlow[4].Add(expDefaultFlow[4]);
+        expAllFlow[4].Add(expDefaultFlow[5]);
         expAllFlow[4].Add(expDefaultFlow[0]);
         expAllFlow[4].Add(expDefaultFlow[1]);
         expAllFlow[4].Add(expDefaultFlow[2]);
         expAllFlow[4].Add(expDefaultFlow[3]);
 
-        expAllFlow[5].Add(expDefaultFlow[5]);
         expAllFlow[5].Add(expDefaultFlow[4]);
+        expAllFlow[5].Add(expDefaultFlow[5]);
         expAllFlow[5].Add(expDefaultFlow[2]);
         expAllFlow[5].Add(expDefaultFlow[3]);
-        expAllFlow[5].Add(expDefaultFlow[1]);
         expAllFlow[5].Add(expDefaultFlow[0]);
+        expAllFlow[5].Add(expDefaultFlow[1]);
 
         //Debug Code
         /*
